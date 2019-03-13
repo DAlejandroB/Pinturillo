@@ -1,4 +1,4 @@
-package edu.uptc.prg3.pinturillo.model.entities;
+package com.edu.uptc.model.entities;
 
 public enum TypeMode {
 	
