@@ -1,6 +1,6 @@
 package com.edu.uptc.model.entities;
 
-public enum TypeMode {
+public enum PlayerType {
 	
 	DRAWER, VIEWER
 

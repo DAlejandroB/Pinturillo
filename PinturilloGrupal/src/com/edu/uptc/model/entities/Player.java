@@ -8,15 +8,15 @@ public class Player extends User{
 		super(nickName, password, friends, globalScore);
 	}
 
-	private TypeMode typeMode;
+	private PlayerType typeMode;
 	protected int score;
 	private Byte strikeCount;
 	
 	private void switchType() {
-		if(typeMode.equals(TypeMode.VIEWER)) {
-			typeMode = TypeMode.DRAWER;
+		if(typeMode.equals(PlayerType.VIEWER)) {
+			typeMode = PlayerType.DRAWER;
 		}else {
-			typeMode = TypeMode.VIEWER;
+			typeMode = PlayerType.VIEWER;
 		}
 	}
 

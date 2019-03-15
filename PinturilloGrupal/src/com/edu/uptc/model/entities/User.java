@@ -17,5 +17,11 @@ public class User {
 		this.globalScore = globalScore;
 	}
 
+	public void addFriend(User friend) {
+		friends.add(friend);
+	}
 	
+	public void deleteFriend(User friend) {
+		friends.delete(friend);
+	}
 }
