@@ -1,7 +1,5 @@
 package com.edu.uptc.model.entities;
 
-import javax.jws.soap.SOAPBinding.Use;
-
 public class Player extends User {
 
 	private PlayerType playerType;

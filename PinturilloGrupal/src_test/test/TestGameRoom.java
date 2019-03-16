@@ -29,6 +29,7 @@ public class TestGameRoom {
 		Player player = new Player(user);
 		game.createRoom(true, player);
 		GameRoom gameRoom = game.getRoomsList().getHead().getInfo();
+		System.out.println("ID ROOM " + gameRoom.getId());
 		System.out.println("-THREE RANDOM WORDS");
 		t.showList(gameRoom.generateWords());
 		System.out.println("--PLAYERS");
@@ -54,6 +55,18 @@ public class TestGameRoom {
 		System.out.println("add correctly? " + gameRoom.addPlayer(player4));
 		System.out.println("--PLAYERS");
 		t.showList2(gameRoom.getPlayers());
+		User user5 = new User("camiloMOLANOSALAMANCA", "bd1s2423");
+		Player player5 = new Player(user5);
+		System.out.println("JOIN " + user5.getNickName() + " to " + " 121");
+		game.joinRoom(player5, 121);
+		System.out.println("--PLAYERS");
+		t.showList2(gameRoom.getPlayers());
+		User user6 = new User("camiloMO", "b1s2423");
+		Player player6 = new Player(user6);
+		System.out.println("JOIN " + user6.getNickName() + " to " + gameRoom.getId());
+		game.joinRoom(player6, gameRoom.getId());
+		System.out.println("--PLAYERS");
+		t.showList2(gameRoom.getPlayers());
 		
 		System.out.println("-----------");
 		System.out.println("Start room");
@@ -68,6 +81,8 @@ public class TestGameRoom {
 		System.out.println("add correctly? " + gameRoom.addPlayer(player3));
 		System.out.println("--PLAYERS");
 		t.showList2(gameRoom.getPlayers());
+		
+		//ESTE TEST SIGUE CORRIENDO PORQUE INICIAN LOS TURNOS Y ESO TODAVIA NO SE HA PROGRAMADO
 		
 	}
 	

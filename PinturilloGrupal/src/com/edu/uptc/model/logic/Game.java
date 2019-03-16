@@ -23,11 +23,24 @@ public class Game {
 		roomsList.add(new GameRoom(isPublic, player, TURN_TIME, LOBBY_TIME, CHOOSING_TIME, TURNS, words));
 	}
 	
+	public void joinRoom(Player player, int id) {
+		Node<GameRoom> aux = roomsList.getHead();
+		while(aux != null) {
+			if(aux.getInfo().getId() == id) {
+				GameRoom gameRoom = roomsList.getByInfo(aux.getInfo()).getInfo();
+				gameRoom.addPlayer(player);
+			}
+			aux = aux.getNext();
+		}
+
+	}
+	
 	public void delateRoom(int id) {
 		Node<GameRoom> aux = roomsList.getHead();
 		while(aux != null) {
 			if(aux.getInfo().getId() == id) {
 				roomsList.delete(aux.getInfo());
+				aux = null;
 			}
 			aux = aux.getNext();
 		}
