@@ -43,6 +43,14 @@ public class LinkedList<T> {
 			aux = null;
 		return aux;
 	}
+	
+	public T getByIndex(int index) {
+		Node<T> aux = this.head;
+		for (int i = 0; i < index; i++) {
+			aux = aux.next;
+		}
+		return aux.inf;
+	}
 
 	public boolean search(T inf) {
 		Boolean exists = false;

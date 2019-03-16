@@ -2,22 +2,31 @@ package com.edu.uptc.model.entities;
 
 import com.edu.uptc.structure.LinkedList;
 
-public class Player extends User{
-	
-	public Player(String nickName, String password, LinkedList<User> friends, long globalScore) {
-		super(nickName, password, friends, globalScore);
-	}
+public class Player extends User {
 
-	private PlayerType typeMode;
+	private PlayerType playerType;
 	protected int score;
 	private Byte strikeCount;
 	
-	private void switchType() {
-		if(typeMode.equals(PlayerType.VIEWER)) {
-			typeMode = PlayerType.DRAWER;
-		}else {
-			typeMode = PlayerType.VIEWER;
+	public Player(User user) {
+		super(user.nickName, user.password);
+		playerType = PlayerType.VIEWER;
+	}
+
+	public void switchType() {
+		if (playerType.equals(PlayerType.VIEWER)) {
+			playerType = PlayerType.DRAWER;
+		} else {
+			playerType = PlayerType.VIEWER;
 		}
+	}
+
+	public PlayerType getPlayerType() {
+		return playerType;
+	}
+
+	public void setPlayerType(PlayerType playerType) {
+		this.playerType = playerType;
 	}
 
 }
