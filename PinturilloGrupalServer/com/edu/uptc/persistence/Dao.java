@@ -1,4 +1,4 @@
-package com.edu.uptc.model.persistence;
+package com.edu.uptc.persistence;
 
 import java.io.BufferedReader;
 import java.io.File;
