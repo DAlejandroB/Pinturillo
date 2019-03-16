@@ -1,6 +1,7 @@
 package test;
 
 import com.edu.uptc.model.entities.Player;
+import com.edu.uptc.model.entities.Status;
 import com.edu.uptc.model.entities.User;
 import com.edu.uptc.model.logic.Game;
 import com.edu.uptc.model.logic.GameRoom;
@@ -43,6 +44,14 @@ public class TestGameRoom {
 		Player player2 = new Player(user2);
 		System.out.println("Add new player to the Room");
 		gameRoom.addPlayer(player2);
+		System.out.println("--PLAYERS");
+		t.showList2(gameRoom.getPlayers());
+		System.out.println("---------");
+		System.out.println("Add new player to the Room OFFLINE");
+		User user4 = new User("0mo4", "bd1s223");
+		user4.setStatus(Status.OFFLINE);
+		Player player4 = new Player(user4);
+		System.out.println("add correctly? " + gameRoom.addPlayer(player4));
 		System.out.println("--PLAYERS");
 		t.showList2(gameRoom.getPlayers());
 		

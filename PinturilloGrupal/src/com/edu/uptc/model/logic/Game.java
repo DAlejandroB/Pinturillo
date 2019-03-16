@@ -2,6 +2,7 @@ package com.edu.uptc.model.logic;
 
 import com.edu.uptc.model.entities.Player;
 import com.edu.uptc.structure.LinkedList;
+import com.edu.uptc.structure.Node;
 
 public class Game {
 
@@ -20,6 +21,16 @@ public class Game {
 
 	public void createRoom(boolean isPublic, Player player) {
 		roomsList.add(new GameRoom(isPublic, player, TURN_TIME, LOBBY_TIME, CHOOSING_TIME, TURNS, words));
+	}
+	
+	public void delateRoom(int id) {
+		Node<GameRoom> aux = roomsList.getHead();
+		while(aux != null) {
+			if(aux.getInfo().getId() == id) {
+				roomsList.delete(aux.getInfo());
+			}
+			aux = aux.getNext();
+		}
 	}
 
 	private void fillWords() {

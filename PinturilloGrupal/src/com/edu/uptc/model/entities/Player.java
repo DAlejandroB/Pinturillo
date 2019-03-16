@@ -1,6 +1,6 @@
 package com.edu.uptc.model.entities;
 
-import com.edu.uptc.structure.LinkedList;
+import javax.jws.soap.SOAPBinding.Use;
 
 public class Player extends User {
 
@@ -11,6 +11,7 @@ public class Player extends User {
 	public Player(User user) {
 		super(user.nickName, user.password);
 		playerType = PlayerType.VIEWER;
+		status = user.status;
 	}
 
 	public void switchType() {

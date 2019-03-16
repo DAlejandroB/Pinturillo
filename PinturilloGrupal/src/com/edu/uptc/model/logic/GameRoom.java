@@ -7,6 +7,7 @@ import javax.swing.plaf.SliderUI;
 
 import com.edu.uptc.model.entities.Player;
 import com.edu.uptc.model.entities.PlayerType;
+import com.edu.uptc.model.entities.Status;
 import com.edu.uptc.structure.LinkedList;
 import com.edu.uptc.structure.Node;
 
@@ -30,6 +31,7 @@ public class GameRoom {
 		players = new LinkedList<>();
 		players.add(player);
 		isAlive = true;
+		word = "";
 		this.isPublic = isPublic;
 		this.turns = turns;
 		this.chooseTime = chooseTime;
@@ -44,10 +46,10 @@ public class GameRoom {
 	}
 
 	public boolean addPlayer(Player player) {
-		if (lobbyTime != 0) {
+		if (lobbyTime != 0 && player.getStatus().equals(Status.ONLINE)) {
 			players.add(player);
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
@@ -63,7 +65,7 @@ public class GameRoom {
 
 			lobbyTime--;
 		}
-		//IN PROCESS startGame();
+		startGame();
 	}
 
 	public void startGame() {
@@ -72,21 +74,21 @@ public class GameRoom {
 			@Override
 			public void run() {
 				for (int i = 0; i < turns; i++) {
-					// TODO while() {}
-					Turn turn = new Turn(selectedWord(), turnTime);
-					setWord("");
+					Node<Player> auxN = players.getHead();
+					while (auxN != null) {
+						
+						new Turn(selectedWord(generateWords()), turnTime);
+						setWord("");
+						auxN = auxN.getNext();
+					}
 				}
-
-				// TODO Auto-generated method stub
-
 			}
 		});
 		thread.start();
 	}
 
-	public String selectedWord() {
-		LinkedList<String> wordsG = generateWords();
-		while (chooseTime != 0 || !word.equals("")) {
+	public String selectedWord(LinkedList<String> wordsG) {
+		while (chooseTime != 0 && word.equals("")) {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -114,7 +116,17 @@ public class GameRoom {
 		Random rnd = new Random();
 		Node<String> aux = words.getHead();
 		for (int i = 0; i < 3; i++) {
-			int randomNumber = rnd.nextInt(words.getSize());
+			int randomNumber = rnd.nextInt(words.getSize() - 1);
+
+			if (i > 0) {
+				Node<String> auxN = threeWords.getHead();
+				while (auxN != null) {
+					while (words.getByIndex(randomNumber).equals(auxN.getInfo())) {
+						randomNumber = rnd.nextInt(words.getSize() - 1);
+					}
+					auxN = auxN.getNext();
+				}
+			}
 
 			int number = 0;
 			while (number != randomNumber) {
@@ -155,6 +167,9 @@ public class GameRoom {
 	public int getLobbyTime() {
 		return lobbyTime;
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}
+
 }

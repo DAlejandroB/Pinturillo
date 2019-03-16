@@ -8,11 +8,13 @@ public class User {
 	protected String password;
 	protected LinkedList<User> friends;
 	protected long globalScore;
+	protected Status status;
 
 	public User(String nickName, String password) {
 		super();
 		this.nickName = nickName;
 		this.password = password;
+		this.status = Status.ONLINE;
 	}
 
 	public void addFriend(User friend) {
@@ -45,6 +47,14 @@ public class User {
 
 	public void setGlobalScore(long globalScore) {
 		this.globalScore = globalScore;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }
