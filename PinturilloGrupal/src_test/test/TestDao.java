@@ -2,7 +2,7 @@ package test;
 
 import java.io.IOException;
 
-import com.edu.uptc.dao.Dao;
+import com.edu.uptc.model.persistence.Dao;
 import com.edu.uptc.structure.LinkedList;
 import com.edu.uptc.structure.Node;
 
