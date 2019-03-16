@@ -3,13 +3,11 @@ package com.edu.uptc.model.logic;
 import java.io.EOFException;
 import java.util.Random;
 
-import javax.swing.plaf.SliderUI;
-
 import com.edu.uptc.model.entities.Player;
-import com.edu.uptc.model.entities.PlayerType;
 import com.edu.uptc.model.entities.Status;
 import com.edu.uptc.structure.LinkedList;
 import com.edu.uptc.structure.Node;
+
 
 public class GameRoom {
 

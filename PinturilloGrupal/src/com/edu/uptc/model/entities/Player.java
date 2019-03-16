@@ -1,5 +1,6 @@
 package com.edu.uptc.model.entities;
 
+
 public class Player extends User {
 
 	private PlayerType playerType;

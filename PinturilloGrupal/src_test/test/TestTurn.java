@@ -1,7 +1,6 @@
 package test;
 
 import com.edu.uptc.model.entities.Player;
-import com.edu.uptc.model.entities.Status;
 import com.edu.uptc.model.entities.User;
 import com.edu.uptc.model.logic.Game;
 import com.edu.uptc.model.logic.GameRoom;
