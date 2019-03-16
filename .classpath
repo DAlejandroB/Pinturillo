@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="PinturilloGrupal/src"/>
+	<classpathentry kind="src" path="PinturilloGrupal/src_test"/>
+	<classpathentry kind="src" path="PinturilloGrupalServer"/>
+	<classpathentry kind="lib" path="PinturilloGrupal/external_libraries/gson-2.8.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
