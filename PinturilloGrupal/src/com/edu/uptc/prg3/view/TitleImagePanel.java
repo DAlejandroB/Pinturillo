@@ -9,7 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class TitleImagePanel  extends JPanel{
-    public TitleImagePanel() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TitleImagePanel() {
         FlowLayout layout = new FlowLayout();
         layout.setHgap(0);
         layout.setVgap(0);

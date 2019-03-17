@@ -22,6 +22,8 @@ public class Control implements ActionListener {
 			String []info = frame.getNewAccountData();
 			if(info!=null) frame.closeCreateAccountDialog();
 			//llamar a este metodo frame.getNewAccountData(); verificar si es nulo, no hacer nada
+		}else if(e.getActionCommand().equals("iniciar_sesion")) {
+			
 		}
 	}
 	
