@@ -4,13 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,11 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
-import com.edu.uptc.prg3.controller.Control;
-
-public class LoginFrame extends JFrame{
+public class LoginFrame extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
@@ -36,6 +31,7 @@ public class LoginFrame extends JFrame{
 	private JTextField txtNickName;
 	private JPasswordField txtPassword;
 	private JButton btnEnter, btnInfo, btnHelp, btnCreateAccount;
+	private CreateAccountDialog dialog;
 	
 	public LoginFrame(ActionListener actionListener) {
 		super("Pinturillo Inicio de Sesion");
@@ -83,7 +79,7 @@ public class LoginFrame extends JFrame{
 		panelOptions = new JPanel(new BorderLayout());
 		ImageIcon icon = new ImageIcon("data/Info_Icon.png");
 		btnInfo = new JButton(icon);
-		btnInfo.addActionListener(actionListener);
+		btnInfo.addActionListener(this);
 		btnInfo.setActionCommand("dar_informacion");
 		btnInfo.setPreferredSize(new Dimension(48,48));
 		panelOptions.add(btnInfo, BorderLayout.EAST);
@@ -101,7 +97,7 @@ public class LoginFrame extends JFrame{
 		
 		icon = new ImageIcon("data/Help_Icon.png");
 		btnHelp = new JButton(icon);
-		btnHelp.addActionListener(actionListener);
+		btnHelp.addActionListener(this);
 		btnHelp.setActionCommand("ayuda_juego");
 		btnHelp.setPreferredSize(new Dimension(48,48));
 		panelOptions.add(btnHelp, BorderLayout.WEST);
@@ -118,9 +114,50 @@ public class LoginFrame extends JFrame{
 	public String getTxtNickName() {
 		return txtNickName.getText();
 	}
-
+	
+	/**
+	 * Obtiene el texto escrito en el campo de contraseña.  
+	 * Luego elimina el contenido del componente por seguridad
+	 * Nota: No se usa getText() para objetos JPasswordField, es obsoleto.
+	 * @return un string con la contraseña ingresada 
+	 */
 	public String getTxtPassword() {
-		return txtPassword.getText();
+		String pass = String.valueOf(txtPassword.getPassword());
+		txtPassword.setText("");
+		return pass;
+	}
+	
+	public void closeCreateAccountDialog() {
+		if(this.dialog!=null) this.dialog.dispose();
+	}
+	
+	public void createAccountDialog(ActionListener actionListener) {
+		this.dialog = new CreateAccountDialog(this, actionListener);
+		this.dialog.setVisible(true);
+	}
+	
+	/**
+	 * Método que obtiene los datos ingresados en el dialogo de nueva cuenta.
+	 * Almacena los datos en un arreglo de strings con el siguiente orden: 
+	 * 1. NickName 2. Password 3. Ruta del icono
+	 * @return un arreglo de strings con la informacion del nuevo usuario.
+	 */
+	public String[] getNewAccountData() {
+		String data[] = null;
+		if(this.dialog!=null) {
+			String password = this.dialog.getPassword();
+			if(!password.equals("contraseña_no_valida")&&!password.equals("")) {
+				String nickName = this.dialog.getNickName();
+				String iconPath = this.dialog.getIconPath();
+				if(!nickName.equals("")) {
+					data = new String[3];
+					data[0] = nickName;
+					data[1] = password;
+					data[2] = iconPath;
+				}
+			}
+		}
+		return data;
 	}
 
 	/**
@@ -132,5 +169,14 @@ public class LoginFrame extends JFrame{
         int yEdge = ( screen.height - getHeight( ) ) / 2;
         setLocation( xEdge, yEdge );
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("dar_informacion")) {
+			System.out.println("info");
+		}else if(e.getActionCommand().equals("ayuda_juego")) {
+			System.out.println("ayuda");
+		}
+	}
 	
 }
