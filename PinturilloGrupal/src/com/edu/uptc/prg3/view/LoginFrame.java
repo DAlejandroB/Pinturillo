@@ -32,6 +32,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 	private JPasswordField txtPassword;
 	private JButton btnEnter, btnInfo, btnHelp, btnCreateAccount;
 	private CreateAccountDialog dialog;
+	private PinturilloProfileFrame profileFrame;
 	
 	public LoginFrame(ActionListener actionListener) {
 		super("Pinturillo Inicio de Sesion");
@@ -74,7 +75,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		btnEnter.setBackground(new Color(247, 98, 85));
 		gbc.gridy = 2;
 		panelLoginInf.add(btnEnter, gbc);
-		panelLoginInf.setBackground(Color.LIGHT_GRAY);
+		panelLoginInf.setBackground(new Color(23, 157, 166));
 		
 		panelOptions = new JPanel(new BorderLayout());
 		ImageIcon icon = new ImageIcon("data/Info_Icon.png");
@@ -129,6 +130,10 @@ public class LoginFrame extends JFrame implements ActionListener{
 	
 	public void closeCreateAccountDialog() {
 		if(this.dialog!=null) this.dialog.dispose();
+	}
+	
+	public void createProfileFrame(ActionListener actionListener, String nickName, long globalScore, String iconPath) {
+		this.profileFrame = new PinturilloProfileFrame(actionListener, nickName, globalScore, iconPath);
 	}
 	
 	public void createAccountDialog(ActionListener actionListener) {

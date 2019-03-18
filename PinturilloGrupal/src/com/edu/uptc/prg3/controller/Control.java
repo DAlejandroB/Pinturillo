@@ -23,7 +23,8 @@ public class Control implements ActionListener {
 			if(info!=null) frame.closeCreateAccountDialog();
 			//llamar a este metodo frame.getNewAccountData(); verificar si es nulo, no hacer nada
 		}else if(e.getActionCommand().equals("iniciar_sesion")) {
-			
+			frame.createProfileFrame(this, "Nombre", 50, "./data/icons/default_profile_icon.png");
+			this.frame.dispose();
 		}
 	}
 	
