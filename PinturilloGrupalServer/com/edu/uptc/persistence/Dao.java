@@ -12,7 +12,7 @@ public class Dao {
 
 	public LinkedList<String> readWords() throws IOException {
 		LinkedList<String> words = new LinkedList<>();
-		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\camil\\git\\Pinturillo\\PinturilloGrupal\\data/listWords.csv"));
+		BufferedReader br = new BufferedReader(new FileReader("data/listWords.csv"));
 		String line = br.readLine();
 		String wordsF[] = null;
 		
