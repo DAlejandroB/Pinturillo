@@ -17,13 +17,7 @@ public class Control implements ActionListener {
 		frame = new LoginFrame(this);
 		comm = new Comunicator();
 	}
-	
-	public void fillFriends() {
-		LinkedList<User> users
-		
-		
-		//Aca va un metodo que recibe la vista
-	}
+
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
