@@ -11,6 +11,7 @@ import com.edu.uptc.structure.Vertex;
 
 public class Controller {
 	private GraphWList<User,Boolean> users;
+	private LinkedList<String> nickNames;
 	private LinkedList<User> connectedUsers;
 	private ServerComm serverComm;
 	private Game game;
@@ -20,6 +21,10 @@ public class Controller {
 	 * Delegar a la persistencia la carga del grafo
 	 * Una vez leido el grafo, inicializarlo
 	 * Metodos de busqueda dentro del grafo por criterios "nickname" y "password"
+	 * 
+	 * lista de comandos
+	 *lgn: login, rgs: registrar, msg: mensaje a la sala
+	 *scc: exito en la operacion, wrn: advertencia al cliente
 	 * 
 	 * */
 	public Controller() {
@@ -47,7 +52,19 @@ public class Controller {
 		
 	}
 	private void registerUser(String nickName, String password) {
-		User newUser = new User(nickName, password);
-		users.add(new Vertex<User, Boolean>(newUser));
+		if(!nickNameInUse(nickName)) {
+			User newUser = new User(nickName, password);
+			users.add(new Vertex<User, Boolean>(newUser));
+			serverComm.sendMessage("/scc");
+		}else {
+			serverComm.sendMessage("/wrn");
+			//TODO 
+		}
+	}
+	private boolean nickNameInUse(String nickName) {
+		boolean r = false;
+		if(nickNames.contains(nickName))
+			r = true;
+		return r;
 	}
 }

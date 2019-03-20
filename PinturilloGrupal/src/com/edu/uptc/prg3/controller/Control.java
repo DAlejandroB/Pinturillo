@@ -24,6 +24,12 @@ public class Control implements ActionListener {
 		}else if(e.getActionCommand().equals("crear_nueva_cuenta")) {
 			String []info = frame.getNewAccountData();
 			comm.sendRegisterInfo(info[0], info[1], null);
+			String operationStatus = comm.recieveMessage();
+			if(operationStatus.substring(0, 3) == "/scc") {
+				//TODO comunicar la creacion del usuario al cliente
+			}else if(operationStatus.substring(0, 3) == "/wrn") {
+				//TODO comunicar que el nombre de usuario ya está ocupado
+			}
 			if(info!=null) frame.closeCreateAccountDialog();
 			//llamar a este metodo frame.getNewAccountData(); verificar si es nulo, no hacer nada
 		}else if(e.getActionCommand().equals("iniciar_sesion")) {

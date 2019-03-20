@@ -1,6 +1,7 @@
 package com.edu.uptc.comm;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -25,10 +26,24 @@ public class ServerComm {
 			//TODO eliminar codigo innecesario
 			DataInputStream dis = new DataInputStream(s.getInputStream());
 			message = dis.readUTF();
+			dis.close();
+			s.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return message;
-	}	
+	}
+	public void sendMessage(String message) {
+		Socket s = null;
+		try {
+			s = serverSocket.accept();
+			DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+			dos.writeUTF(message);
+			s.close();
+			dos.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
