@@ -22,7 +22,7 @@ public class Control implements ActionListener {
 		if(e.getActionCommand().equals("crear_cuenta")) {
 			frame.createAccountDialog(this);
 		}else if(e.getActionCommand().equals("crear_nueva_cuenta")) {
-			String []info = frame.getNewAccountData();
+			String []info = frame.getNewAccountData();//verificar si el nickName no esta ya en uso!!
 			comm.sendRegisterInfo(info[0], info[1], null);
 			if(info!=null) frame.closeCreateAccountDialog();
 			//llamar a este metodo frame.getNewAccountData(); verificar si es nulo, no hacer nada
