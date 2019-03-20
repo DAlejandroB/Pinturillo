@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>PinturilloGrupalServer</name>
-			<type>2</type>
-			<location>C:/Users/asus/Documents/MyJavaProyects/GitHubTeamProjects/Pinturillo/PinturilloGrupalServer</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import com.edu.uptc.comm.Comunicator;
 import com.edu.uptc.prg3.view.LoginFrame;
+import com.edu.uptc.structure.LinkedList;
 
 public class Control implements ActionListener {
 	LoginFrame frame;
@@ -15,6 +16,13 @@ public class Control implements ActionListener {
 	public Control() {
 		frame = new LoginFrame(this);
 		comm = new Comunicator();
+	}
+	
+	public void fillFriends() {
+		LinkedList<User> users
+		
+		
+		//Aca va un metodo que recibe la vista
 	}
 	
 	@Override
