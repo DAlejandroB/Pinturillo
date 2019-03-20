@@ -57,7 +57,7 @@ public class UserFriendsFrame extends JFrame{
 		gbcPanel.gridy=0;
 		friendInfoPanel.add(txtFriendInfo, gbcPanel);
 		
-		lblfriendsNumber = new JLabel("No. total de amigos: "+friendsName.getSize());
+		lblfriendsNumber = new JLabel("No. total de amigos:  "+friendsName.getSize());
 		gbcPanel.gridy=1;
 		friendInfoPanel.add(lblfriendsNumber, gbcPanel);
 		
