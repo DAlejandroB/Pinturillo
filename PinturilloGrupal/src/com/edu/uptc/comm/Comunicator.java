@@ -6,6 +6,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import com.edu.uptc.structure.LinkedList;
+
+import javafx.beans.property.SimpleListProperty;
+
 public class Comunicator {
 	private static final int PORT = 10345;
 	private static final String SERVER_IP = "192.168.0.3";
@@ -14,6 +18,16 @@ public class Comunicator {
 	
 	public Comunicator(){
 	}
+	
+	public String requestFriendsList(){
+		sendMessage("/rql");
+		String message = this.recieveMessage();
+		if(message.substring(0, 3).equals("/jsl")) {
+			return message.substring(4);
+		}
+		return null;
+	}
+	
 	public void sendMessage(String message) {
 		try {
 			Socket socket = new Socket(SERVER_IP,PORT);
@@ -46,7 +60,7 @@ public class Comunicator {
 	}
 	public void sendRegisterInfo(String nickname, String password, BufferedImage image) {
 		sendMessage("/rgs" + nickname + "/" + password);
-		//TODO crear metodo para enviar no solo nombre y usuario, pero tambien contraseña
+		//TODO crear metodo para enviar no solo nombre y contraseña, pero tambien imagen
 	}
 	public void sendChatMessage(String message) {
 		sendMessage("/msg" + message);

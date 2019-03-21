@@ -35,7 +35,7 @@ public class Control implements ActionListener {
 				}else if(operationStatus.substring(0, 3) == "/wrn") {
 					logFrame.printMessagge("El nombre de usuario ya se encuentra en uso.");
 					//TODO comunicar que el nombre de usuario ya está ocupado
-				}else logFrame.closeCreateAccountDialog(); 
+				}else logFrame.closeCreateAccountDialog();
 			}
 			//llamar a este metodo frame.getNewAccountData(); verificar si es nulo, no hacer nada
 		}else if(e.getActionCommand().equals("iniciar_sesion")) {
