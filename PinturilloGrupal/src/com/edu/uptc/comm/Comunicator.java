@@ -8,7 +8,6 @@ import java.net.Socket;
 
 import com.edu.uptc.structure.LinkedList;
 
-import javafx.beans.property.SimpleListProperty;
 
 public class Comunicator {
 	private static final int PORT = 10345;
