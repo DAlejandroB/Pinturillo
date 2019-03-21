@@ -1,5 +1,6 @@
 package com.edu.uptc.prg3.view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
@@ -9,14 +10,15 @@ import javax.swing.JMenuItem;
 public class ProfileMenuBar extends JMenuBar {
 	
 	private static final long serialVersionUID = 1L;
-	private JMenu friendsMenu, settingsMenu;
-	private JMenuItem modInfoItem, deleteItem, logOutItem;
+	private JMenu settingsMenu;
+	private JMenuItem friendsItem, modInfoItem, deleteItem, logOutItem;
 	
 	public ProfileMenuBar(ActionListener actionListener) {
-		friendsMenu = new JMenu("Amigos");
-		friendsMenu.addActionListener(actionListener);
-		friendsMenu.setActionCommand("ver_amigos");
-		this.add(friendsMenu);
+		friendsItem = new JMenuItem("Amigos");
+		friendsItem.addActionListener(actionListener);
+		friendsItem.setActionCommand("ver_amigos");
+		friendsItem.setPreferredSize(new Dimension(50,10));
+		this.add(friendsItem);
 		
 		settingsMenu = new JMenu("Opciones de Cuenta");
 		modInfoItem = new JMenuItem("Modificar Informacion");

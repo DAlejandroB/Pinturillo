@@ -14,7 +14,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.edu.uptc.structure.LinkedList;
 
 public class PinturilloProfileFrame extends JFrame {
 	/**
@@ -25,12 +28,13 @@ public class PinturilloProfileFrame extends JFrame {
 	private JPanel userInfoPanel, buttonsPanel;
 	private JLabel lblNickName, lblUserNick, lblGlobalScore, lblUserScore, lblIcon;
 	private JButton btnPublicRoom, btnPrivateRoom, btnCreatePrivateRoom;
+	private UserFriendsFrame userFriendsFrame;
 	
 	public PinturilloProfileFrame(ActionListener actionListener, String nickName,
 			long globalScore, String iconPath) {
 		super("Pinturillo Social");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setSize(500,400);
+		this.setSize(500,450);
 		this.setLayout(new BorderLayout());
 		menuBar = new ProfileMenuBar(actionListener);
 		this.setJMenuBar(menuBar);
@@ -42,11 +46,13 @@ public class PinturilloProfileFrame extends JFrame {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		lblNickName = new JLabel("NickName:   ");
+		lblNickName.setFont(new Font(Font.SANS_SERIF, 20, 20));
 		gbc.gridx=0;
 		gbc.gridy=0;
 		userInfoPanel.add(lblNickName, gbc);
 		
 		lblUserNick = new JLabel(nickName+"     ");
+		lblUserNick.setFont(new Font(Font.SANS_SERIF, 20, 20));
 		gbc.gridx=1;
 		userInfoPanel.add(lblUserNick, gbc);
 		
@@ -57,12 +63,14 @@ public class PinturilloProfileFrame extends JFrame {
 		userInfoPanel.add(lblIcon, gbc);
 		
 		lblGlobalScore = new JLabel("<html>Puntuación <br> global:</html>");
+		lblGlobalScore.setFont(new Font(Font.SANS_SERIF, 20, 20));
 		gbc.weighty=1;
 		gbc.gridx=0;
 		gbc.gridy=1;
 		userInfoPanel.add(lblGlobalScore, gbc);
 		
 		lblUserScore = new JLabel(String.valueOf(globalScore));
+		lblUserScore.setFont(new Font(Font.SANS_SERIF, 20, 20));
 		gbc.gridx=1;
 		userInfoPanel.add(lblUserScore, gbc);
 		this.add(userInfoPanel, BorderLayout.CENTER);
@@ -103,6 +111,27 @@ public class PinturilloProfileFrame extends JFrame {
 		this.setVisible(true);
 	}
 		
+	public void createUserFriendsFrame(ActionListener actionListener, String userNick, LinkedList<String> friendsName) {
+		this.userFriendsFrame = new UserFriendsFrame(actionListener, userNick, friendsName);
+	}
+	
+	public void setFriendInfo(String nickName, long globalScore, String status) {
+		this.userFriendsFrame.setFriendInfo(nickName, globalScore, status);
+	}
+	
+	/**
+	 * Creates a confirmDialog with a message
+	 * @param message the message to ask in the dialog
+	 * @return 1 if the answer is 'OK', 2 in another case
+	 */
+	public int generateQuestionDialog(String message) {
+		return JOptionPane.showConfirmDialog(this, message)==JOptionPane.OK_OPTION?1:2;
+	}
+	
+	public String getSelectedFriend() {
+		return this.userFriendsFrame.getSelectedFriend();
+	}
+	
 	/**
 	 * Método que centra el frame 
 	 */
