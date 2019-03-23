@@ -26,6 +26,7 @@ public class Controller implements ActionListener{
 			String recieved = comm.recieveMessage();
 			switch(recieved) {
 			case "/scc":
+				loginFrame.closeCreateAccountDialog();
 				loginFrame.printMessagge("La cuenta se ha creado exitosamente");
 				break;
 			case "/wrn":
@@ -48,7 +49,7 @@ public class Controller implements ActionListener{
 			break;
 		case "crear_nueva_cuenta":
 			String[] info = loginFrame.getNewAccountData();
-			sendNewAccountInfo(info);
+			if(info!=null) sendNewAccountInfo(info);			
 			break;
 		case "iniciar_sesion":
 			comm.sendLoginInfo(loginFrame.getTxtNickName(), loginFrame.getTxtPassword());

@@ -105,6 +105,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		this.add(panelOptions, BorderLayout.SOUTH);
 		
 		this.center();
+		this.setResizable(false);
 		this.setVisible(true);
 	}	
 	

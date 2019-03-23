@@ -36,11 +36,11 @@ public class UserFriendsFrame extends JFrame{
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbcFrame = new GridBagConstraints();
 		friendsPanel = new JPanel();
-		friendsPanel.setBackground(Color.GRAY);
+		friendsPanel.setBackground(Color.LIGHT_GRAY);
 		friendsPanel.setPreferredSize(new Dimension(250,200));
 		friendsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray),
 				"Amigos actuales", 
-				0, 1, new Font("Italic", 2, 15), Color.GREEN));
+				0, 1, new Font("Italic", 2, 15), new Color(0, 193, 9)));
 		friendsUserList = new JComboBox<String>();
 		friendsUserList.addActionListener(actionListener);
 		friendsUserList.setActionCommand("amigo_seleccionado");
@@ -86,6 +86,7 @@ public class UserFriendsFrame extends JFrame{
 		gbcFrame.gridx=1;
 		this.add(friendSettingsPanel, gbcFrame);
 		this.setVisible(true);
+		this.setResizable(false);
 		this.center();
 		
 	}

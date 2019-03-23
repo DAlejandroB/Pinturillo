@@ -19,6 +19,7 @@ public class CreateAccountDialog extends JDialog {
 		this.add(panel, BorderLayout.CENTER);
 		this.setTitle("Nueva Cuenta");
 		this.center();
+		this.setResizable(false);
 		this.pack();
 	}
 	
