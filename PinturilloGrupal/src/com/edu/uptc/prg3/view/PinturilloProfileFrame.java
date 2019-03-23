@@ -108,6 +108,7 @@ public class PinturilloProfileFrame extends JFrame {
 		
 		this.add(buttonsPanel, BorderLayout.SOUTH);
 		this.center();
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 		

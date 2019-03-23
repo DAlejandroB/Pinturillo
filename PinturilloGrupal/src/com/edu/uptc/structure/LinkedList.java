@@ -69,7 +69,7 @@ public class LinkedList<T> {
 			Boolean delete = false;
 			Node<T> last = null;
 			Node<T> aux = this.head;
-			while (aux.next != null && delete == false) {
+			while (aux != null && delete == false) {
 				if (aux.getInfo().toString().equals(inf.toString())) {
 					if (last == null) {
 						this.head = aux.next;
