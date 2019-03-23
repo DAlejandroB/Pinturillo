@@ -62,6 +62,7 @@ public class Controller implements ActionListener{
 		case "modificar_info":
 			break;
 		case "eliminar_cuenta":
+			
 			break;
 		case "cerrar_sesion":
 			break;
