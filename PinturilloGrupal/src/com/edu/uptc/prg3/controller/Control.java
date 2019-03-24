@@ -20,6 +20,27 @@ public class Control implements ActionListener {
 		comm = new Comunicator();
 	}
 
+	/**
+	 * Comandos de la vista
+	 * mostrar_puntuaciones
+	 * mensaje_enviado
+	 * reportar
+	 * crear_nueva_cuenta
+	 * iniciar_sesion
+	 * crear_cuenta
+	 * entrar_sala_publica
+	 * entrar_sala_privada
+	 * crear_sala_privada
+	 * ver_amigos
+	 * modificar_info
+	 * eliminar_cuenta
+	 * cerrar_sesion
+	 * abandonar_sala_publica
+	 * amigo_seleccionado //muestra info del amigo seleccionado
+	 * borrar_amigo
+	 * añadir_amigo
+	 * 
+	 */
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -72,7 +93,6 @@ public class Control implements ActionListener {
 			
 		}else if(e.getActionCommand().equals("mostrar_puntuaciones")) {
 			this.profileFrame.generateScoreTable(new LinkedList<String> (), new LinkedList<Integer>());
-			System.out.println("puntuaciones");
 		}
 	}
 	
