@@ -96,7 +96,7 @@ public class UserFriendsFrame extends JFrame{
 	 * @return A string with a nickName
 	 */
 	public String getSelectedFriend() {
-		return this.friendsUserList.getSelectedItem().toString();
+		return this.friendsUserList.getSelectedItem()!=null?this.friendsUserList.getSelectedItem().toString():"";
 	}
 	
 	/**
@@ -115,6 +115,15 @@ public class UserFriendsFrame extends JFrame{
 			    info+="GlobalScore: "+globalScore+"\n";
 			    info+="Status: "+status;
 		this.txtFriendInfo.setText(info);
+	}
+	
+	public String addNewFriend() {
+		return JOptionPane.showInputDialog("Ingrese el nickName del usuario: ");	
+	}
+	
+	public void generateFriendNotFoundMessage() {
+		JOptionPane.showMessageDialog(this, "Error 404. Usuario no encontrado", "Error",
+												JOptionPane.ERROR_MESSAGE);
 	}
 	
 	/**

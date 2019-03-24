@@ -62,8 +62,7 @@ public class Controller implements ActionListener{
 				loginFrame.printMessagge("Cuenta no registrada o contraseña incorrecta");
 			break;
 		case "ver_amigos":
-			ppFrame.createUserFriendsFrame(this, "User", friendList());
-			//TODO enviar el nombre del usuario
+			ppFrame.createUserFriendsFrame(this, nickName, friendList());
 			break;
 		case "borrar_amigo":
 			String nickNameFriend = ppFrame.getSelectedFriend();
@@ -99,5 +98,13 @@ public class Controller implements ActionListener{
 	private void register() {
 		String[] info = loginFrame.getNewAccountData();
 		if(info!=null) sendNewAccountInfo(info);		
+	}
+	
+	/**
+	 * Ejecutable temporal... pasar a paquete runner
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Controller controller = new Controller();
 	}
 }

@@ -37,9 +37,9 @@ public class ChatPanel extends JPanel{
 		gbc.fill = GridBagConstraints.REMAINDER;
 		txtChat = new JTextPane();
 		txtChat.setEditable(false);
-		txtChat.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width/2)-80,
+		txtChat.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width/2)-70,
 				Toolkit.getDefaultToolkit().getScreenSize().height-150));
-		txtChat.setBorder(BorderFactory.createLineBorder(Color.black));
+		txtChat.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		gbc.gridx=0;
 		gbc.gridy=0;
 		this.add(txtChat, gbc);

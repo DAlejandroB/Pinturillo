@@ -76,12 +76,11 @@ public class Control implements ActionListener {
 		}else if(e.getActionCommand().equals("modificar_info")) {
 			
 		}else if(e.getActionCommand().equals("eliminar_cuenta")) {
-			if(this.profileFrame.generateQuestionDialog("Esta seguro que desea eliminar esta cuenta?"
-					+ "\nLos cambios no podrán ser revertidos")==1) {
+			if(this.profileFrame.generateDeleteAccountDialog()==1) {
 				//metodo de eliminar cuenta
 			}
 		}else if(e.getActionCommand().equals("cerrar_sesion")) {
-			if(this.profileFrame.generateQuestionDialog("Esta seguro que desea cerrar la sesión actual?")==1){
+			if(this.profileFrame.generateCloseSesionDialog()==1){
 				//metodo para cerrar sesion
 			}
 		}else if(e.getActionCommand().equals("entrar_sala_publica")) {
@@ -93,6 +92,16 @@ public class Control implements ActionListener {
 			
 		}else if(e.getActionCommand().equals("mostrar_puntuaciones")) {
 			this.profileFrame.generateScoreTable(new LinkedList<String> (), new LinkedList<Integer>());
+		}else if(e.getActionCommand().equals("borrar_amigo")) {
+			String nickNameFriend = profileFrame.getSelectedFriend();
+			if(nickNameFriend!=""&&this.profileFrame.deleteFriendResponse()==1) {
+				//metodo para eliminar un amigo por su nickName
+			}	
+		}else if(e.getActionCommand().equals("añadir_amigo")) {
+			String friend = this.profileFrame.addNewFriend();
+			//metodo que busca y añade al amigo a la lista del usuario local
+			//si no lo encuentra
+			this.profileFrame.generateFriendNotFoundMessage();
 		}
 	}
 	

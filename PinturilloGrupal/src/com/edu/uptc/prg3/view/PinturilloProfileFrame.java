@@ -128,12 +128,29 @@ public class PinturilloProfileFrame extends JFrame {
 	 * @param message the message to ask in the dialog
 	 * @return 1 if the answer is 'OK', 2 in another case
 	 */
-	public int generateQuestionDialog(String message) {
+	private int generateQuestionDialog(String message) {
 		return JOptionPane.showConfirmDialog(this, message)==JOptionPane.OK_OPTION?1:2;
+	}
+	
+	public int generateDeleteAccountDialog() {
+		return this.generateQuestionDialog("Esta seguro que desea eliminar esta cuenta?"
+				+ "\nLos cambios no podrán ser revertidos");
+	}
+	
+	public int generateCloseSesionDialog() {
+		return this.generateQuestionDialog("Esta seguro que desea cerrar la sesión actual?");
 	}
 	
 	public int deleteFriendResponse() {
 		return this.userFriendsFrame.deleteFriendResponse();
+	}
+	
+	public String addNewFriend() {
+		return this.userFriendsFrame.addNewFriend();
+	}
+	
+	public void generateFriendNotFoundMessage() {
+		this.userFriendsFrame.generateFriendNotFoundMessage();
 	}
 	
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
