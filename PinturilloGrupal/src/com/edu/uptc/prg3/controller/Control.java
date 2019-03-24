@@ -63,6 +63,12 @@ public class Control implements ActionListener {
 			if(this.profileFrame.generateQuestionDialog("Esta seguro que desea cerrar la sesión actual?")==1){
 				//metodo para cerrar sesion
 			}
+		}else if(e.getActionCommand().equals("entrar_sala_publica")) {
+			this.profileFrame.createPublicLobbyFrame(this, 60, new LinkedList<String>());
+		}else if(e.getActionCommand().equals("entrar_sala_privada")) {
+			
+		}else if(e.getActionCommand().equals("crear_sala_privada")) {
+			
 		}
 	}
 	

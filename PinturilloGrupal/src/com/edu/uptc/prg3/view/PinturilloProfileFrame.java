@@ -29,6 +29,8 @@ public class PinturilloProfileFrame extends JFrame {
 	private JLabel lblNickName, lblUserNick, lblGlobalScore, lblUserScore, lblIcon;
 	private JButton btnPublicRoom, btnPrivateRoom, btnCreatePrivateRoom;
 	private UserFriendsFrame userFriendsFrame;
+	private PublicLobbyFrame publicLobby;
+	//private PrivateLobby privateLobby;
 	
 	public PinturilloProfileFrame(ActionListener actionListener, String nickName,
 			long globalScore, String iconPath) {
@@ -80,7 +82,7 @@ public class PinturilloProfileFrame extends JFrame {
 		buttonsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		btnPublicRoom = new JButton("<html>Ingresar <br> a sala <br> pública </html>");
 		btnPublicRoom.addActionListener(actionListener);
-		btnPublicRoom.setActionCommand("crear_sala_publica");
+		btnPublicRoom.setActionCommand("entrar_sala_publica");
 		btnPublicRoom.setBackground(new Color(207, 65, 40));
 		btnPublicRoom.setFont(new Font("Italic", 20, 20));
 		btnPublicRoom.setPreferredSize(new Dimension(155,150));
@@ -90,7 +92,7 @@ public class PinturilloProfileFrame extends JFrame {
 		
 		btnPrivateRoom = new JButton("<html>Ingresar <br> a sala <br> privada </html>");
 		btnPrivateRoom.addActionListener(actionListener);
-		btnPrivateRoom.setActionCommand("crear_sala_publica");
+		btnPrivateRoom.setActionCommand("entrar_sala_privada");
 		btnPrivateRoom.setBackground(new Color(207, 111, 40));
 		btnPrivateRoom.setFont(new Font("Italic", 20, 20));
 		btnPrivateRoom.setPreferredSize(new Dimension(155,150));
@@ -127,6 +129,11 @@ public class PinturilloProfileFrame extends JFrame {
 	 */
 	public int generateQuestionDialog(String message) {
 		return JOptionPane.showConfirmDialog(this, message)==JOptionPane.OK_OPTION?1:2;
+	}
+	
+	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
+		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);
+		
 	}
 	
 	public String getSelectedFriend() {
