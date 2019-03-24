@@ -74,6 +74,7 @@ public class Control implements ActionListener {
 			//encuentra al usuario seleccionado, y extrae su información, para plasmarla en un textPane
 			this.profileFrame.setFriendInfo(selectedFriend, 50, "Online");
 		}else if(e.getActionCommand().equals("modificar_info")) {
+			this.profileFrame.createModInfoDialog(this, "user", "ruta_imagen");
 			
 		}else if(e.getActionCommand().equals("eliminar_cuenta")) {
 			if(this.profileFrame.generateDeleteAccountDialog()==1) {
@@ -102,6 +103,11 @@ public class Control implements ActionListener {
 			//metodo que busca y añade al amigo a la lista del usuario local
 			//si no lo encuentra
 			this.profileFrame.generateFriendNotFoundMessage();
+		}else if(e.getActionCommand().equals("modificar_cuenta")) {
+			String info[] = this.profileFrame.getModAccountData();
+			if(info!=null) {
+				this.profileFrame.closeModDialog();
+			}
 		}
 	}
 	

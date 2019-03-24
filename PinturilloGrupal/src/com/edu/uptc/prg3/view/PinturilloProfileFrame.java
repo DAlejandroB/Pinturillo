@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.edu.uptc.prg3.view.dialogs.CreateAccountDialog;
+import com.edu.uptc.prg3.view.dialogs.ModifyInfoDialog;
 import com.edu.uptc.structure.LinkedList;
 
 public class PinturilloProfileFrame extends JFrame {
@@ -32,6 +34,7 @@ public class PinturilloProfileFrame extends JFrame {
 	private PublicLobbyFrame publicLobby;
 	//private PrivateLobby privateLobby;
 	private GameFrame gameFrame;
+	private ModifyInfoDialog modInfoDialog;
 	
 	public PinturilloProfileFrame(ActionListener actionListener, String nickName,
 			long globalScore, String iconPath) {
@@ -168,6 +171,39 @@ public class PinturilloProfileFrame extends JFrame {
 	
 	public String getSelectedFriend() {
 		return this.userFriendsFrame.getSelectedFriend();
+	}
+	
+	public void createModInfoDialog(ActionListener actionListener, String nickName, String iconPath) {
+		this.modInfoDialog = new ModifyInfoDialog(this, actionListener, nickName, iconPath);
+		this.modInfoDialog.setVisible(true);
+	}
+	
+	/**
+	 * Método que obtiene los datos ingresados en el dialogo de nueva cuenta.
+	 * Almacena los datos en un arreglo de strings con el siguiente orden: 
+	 * 1. NickName 2. Password 3. Ruta del icono
+	 * @return un arreglo de strings con la informacion del nuevo usuario.
+	 */
+	public String[] getModAccountData() {
+		String data[] = null;
+		if(this.modInfoDialog!=null) {
+			String password = this.modInfoDialog.getPassword();
+			if(!password.equals("contraseña_no_valida")&&!password.equals("")) {
+				String nickName = this.modInfoDialog.getNickName();
+				String iconPath = this.modInfoDialog.getIconPath();
+				if(!nickName.equals("")) {
+					data = new String[3];
+					data[0] = nickName;
+					data[1] = password;
+					data[2] = iconPath;
+				}
+			}
+		}
+		return data;
+	}
+	
+	public void closeModDialog() {
+		this.modInfoDialog.dispose();
 	}
 	
 	/**

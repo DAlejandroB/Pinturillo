@@ -34,7 +34,6 @@ public class LoginFrame extends JFrame implements ActionListener{
 	private JPasswordField txtPassword;
 	private JButton btnEnter, btnInfo, btnHelp, btnCreateAccount;
 	private CreateAccountDialog dialog;
-	private PinturilloProfileFrame profileFrame;
 	
 	public LoginFrame(ActionListener actionListener) {
 		super("Pinturillo Inicio de Sesion");
@@ -134,11 +133,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 	public void closeCreateAccountDialog() {
 		if(this.dialog!=null) this.dialog.dispose();
 	}
-	
-	public void createProfileFrame(ActionListener actionListener, String nickName, long globalScore, String iconPath) {
-		this.profileFrame = new PinturilloProfileFrame(actionListener, nickName, globalScore, iconPath);
-	}
-	
+
 	public void createAccountDialog(ActionListener actionListener) {
 		this.dialog = new CreateAccountDialog(this, actionListener);
 		this.dialog.setVisible(true);
