@@ -11,14 +11,14 @@ import com.edu.uptc.structure.LinkedList;
 
 public class Comunicator {
 	private static final int PORT = 10345;
-	private static final String SERVER_IP = "192.168.0.3";
+	private static final String SERVER_IP = "192.168.0.4";
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	
 	public Comunicator(){
 	}
 	
-	public String requestFriendsList(){
+	public String requestFriendsList(String nickname){
 		sendMessage("/rql");
 		String message = this.recieveMessage();
 		if(message.substring(0, 3).equals("/jsl")) {
@@ -32,8 +32,6 @@ public class Comunicator {
 			Socket socket = new Socket(SERVER_IP,PORT);
 			dos = new DataOutputStream(socket.getOutputStream());
 			dos.writeUTF(message);
-			socket.close();
-			dos.close();
 		} catch (IOException e) {
 			System.out.println("Ha habido un problema con el envio de informacion");
 			e.printStackTrace();
@@ -48,10 +46,9 @@ public class Comunicator {
 		String message = "";
 		try {
 			socket = new Socket(SERVER_IP, PORT);
+			System.out.println(socket.isConnected());
 			dis = new DataInputStream(socket.getInputStream());
 			message =  dis.readUTF();
-			socket.close();
-			dis.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
