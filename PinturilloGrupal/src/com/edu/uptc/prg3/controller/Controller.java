@@ -14,11 +14,14 @@ public class Controller implements ActionListener{
 	private Comunicator comm;
 	private PinturilloProfileFrame ppFrame;
 	private Gson gsonParser;
-	
+	private String nickName;
 	public Controller(){
 		gsonParser = new Gson();
-		loginFrame = new LoginFrame(this);
+		init();
 		comm = new Comunicator();
+	}
+	private void init() {
+		loginFrame = new LoginFrame(this);
 	}
 	private void sendNewAccountInfo(String[] accountInfo) {
 		if(accountInfo != null) {
@@ -36,7 +39,7 @@ public class Controller implements ActionListener{
 		}
 	}
 	private LinkedList<String> friendList(){
-		String list = comm.requestFriendsList();
+		String list = comm.requestFriendsList(this.nickName);
 		return gsonParser.fromJson(list, LinkedList.class);
 	}
 	
@@ -48,11 +51,15 @@ public class Controller implements ActionListener{
 			loginFrame.createAccountDialog(this);
 			break;
 		case "crear_nueva_cuenta":
-			String[] info = loginFrame.getNewAccountData();
-			if(info!=null) sendNewAccountInfo(info);			
+				loginFrame.closeCreateAccountDialog();
+				loginFrame.printMessagge("Cuenta registrada exitosamente");
 			break;
 		case "iniciar_sesion":
-			comm.sendLoginInfo(loginFrame.getTxtNickName(), loginFrame.getTxtPassword());
+			this.nickName = loginFrame.getTxtNickName();
+			if(login())
+				ppFrame = new PinturilloProfileFrame(this, nickName, 0, "");
+			else 
+				loginFrame.printMessagge("Cuenta no registrada o contraseña incorrecta");
 			break;
 		case "ver_amigos":
 			ppFrame.createUserFriendsFrame(this, "User", friendList());
@@ -63,10 +70,25 @@ public class Controller implements ActionListener{
 		case "modificar_info":
 			break;
 		case "eliminar_cuenta":
-			
+			break;
+		case "crear_sala_privada":
+			comm.sendMessage("/crtPrivate");
+			break;
+		case "crear_sala_publica":
+			comm.sendMessage("/crtPublic");
 			break;
 		case "cerrar_sesion":
+			comm.sendMessage("/lgo" + nickName);
 			break;
 		}
+	}
+	private boolean login() {
+		comm.sendLoginInfo(loginFrame.getTxtNickName(), loginFrame.getTxtPassword());
+		String recieved = comm.recieveMessage();
+		return (recieved == "lgs");
+	}
+	private void register() {
+		String[] info = loginFrame.getNewAccountData();
+		if(info!=null) sendNewAccountInfo(info);
 	}
 }
