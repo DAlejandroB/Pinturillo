@@ -10,15 +10,17 @@ import javax.swing.JMenuItem;
 public class ProfileMenuBar extends JMenuBar {
 	
 	private static final long serialVersionUID = 1L;
-	private JMenu settingsMenu;
+	private JMenu settingsMenu, friendsMenu;
 	private JMenuItem friendsItem, modInfoItem, deleteItem, logOutItem;
 	
 	public ProfileMenuBar(ActionListener actionListener) {
-		friendsItem = new JMenuItem("Amigos");
+		
+		friendsMenu = new JMenu("Amigos");
+		friendsItem = new JMenuItem("Ver Amigos");
 		friendsItem.addActionListener(actionListener);
 		friendsItem.setActionCommand("ver_amigos");
-		friendsItem.setPreferredSize(new Dimension(50,10));
-		this.add(friendsItem);
+		friendsMenu.add(friendsItem);
+		this.add(friendsMenu);
 		
 		settingsMenu = new JMenu("Opciones de Cuenta");
 		modInfoItem = new JMenuItem("Modificar Informacion");
@@ -35,7 +37,6 @@ public class ProfileMenuBar extends JMenuBar {
 		logOutItem.addActionListener(actionListener);
 		logOutItem.setActionCommand("cerrar_sesion");
 		settingsMenu.add(logOutItem);
-		
 		this.add(settingsMenu);				
 	}
 }
