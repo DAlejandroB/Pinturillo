@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
@@ -80,7 +81,6 @@ public class UserFriendsFrame extends JFrame{
 		btnAddFriend.setActionCommand("añadir_amigo");
 		gbcPanel.gridy=1;
 		buttonsPanel.add(btnAddFriend, gbcPanel);
-		
 		friendSettingsPanel.add(buttonsPanel, BorderLayout.SOUTH);
 		
 		gbcFrame.gridx=1;
@@ -91,8 +91,23 @@ public class UserFriendsFrame extends JFrame{
 		
 	}
 	
+	/**
+	 * Get the nickName of the selected friend in the comboBox
+	 * @return A string with a nickName
+	 */
 	public String getSelectedFriend() {
 		return this.friendsUserList.getSelectedItem().toString();
+	}
+	
+	/**
+	 * Creates a confirmDialog with a message
+	 * @param message the message to ask in the dialog
+	 * @return 1 if the answer is 'OK', 2 in another case
+	 */
+	public int deleteFriendResponse() {
+		String message = "Esta seguro que desea eliminar a "+this.friendsUserList.getSelectedItem().toString()+
+				" de su lista de amigos?";
+		return JOptionPane.showConfirmDialog(this, message)==JOptionPane.OK_OPTION?1:2;
 	}
 	
 	public void setFriendInfo(String nickName, long globalScore, String status) {

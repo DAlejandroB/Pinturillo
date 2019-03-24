@@ -132,6 +132,10 @@ public class PinturilloProfileFrame extends JFrame {
 		return JOptionPane.showConfirmDialog(this, message)==JOptionPane.OK_OPTION?1:2;
 	}
 	
+	public int deleteFriendResponse() {
+		return this.userFriendsFrame.deleteFriendResponse();
+	}
+	
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
 		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);
 		

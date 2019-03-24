@@ -65,7 +65,16 @@ public class Controller implements ActionListener{
 			ppFrame.createUserFriendsFrame(this, "User", friendList());
 			//TODO enviar el nombre del usuario
 			break;
+		case "borrar_amigo":
+			String nickNameFriend = ppFrame.getSelectedFriend();
+			if(this.ppFrame.deleteFriendResponse()==1) {
+				//metodo para eliminar un amigo por su nickName
+			}			
+			break;
 		case "amigo_seleccionado":
+			String selectedFriend = ppFrame.getSelectedFriend();
+			//metodo que busca un usuario por su nickName, y retorna su nickName, puntaje global y status
+			ppFrame.setFriendInfo(selectedFriend, 0, "online"); //en 0 el puntaje y en "online" el status
 			break;
 		case "modificar_info":
 			break;
