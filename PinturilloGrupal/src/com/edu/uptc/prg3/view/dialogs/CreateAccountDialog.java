@@ -1,4 +1,4 @@
-package com.edu.uptc.prg3.view;
+package com.edu.uptc.prg3.view.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+
+import com.edu.uptc.prg3.view.CreateAccountPanel;
+import com.edu.uptc.prg3.view.LoginFrame;
 
 public class CreateAccountDialog extends JDialog {
 	private static final long serialVersionUID = 1L;

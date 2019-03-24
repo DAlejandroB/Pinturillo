@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.edu.uptc.prg3.view.dialogs.CreateAccountDialog;
+
 public class LoginFrame extends JFrame implements ActionListener{
 	/**
 	 * 

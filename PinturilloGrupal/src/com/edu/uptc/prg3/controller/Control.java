@@ -65,10 +65,14 @@ public class Control implements ActionListener {
 			}
 		}else if(e.getActionCommand().equals("entrar_sala_publica")) {
 			this.profileFrame.createPublicLobbyFrame(this, 60, new LinkedList<String>());
+			this.profileFrame.createGameFrame(this, true);
 		}else if(e.getActionCommand().equals("entrar_sala_privada")) {
 			
 		}else if(e.getActionCommand().equals("crear_sala_privada")) {
 			
+		}else if(e.getActionCommand().equals("mostrar_puntuaciones")) {
+			this.profileFrame.generateScoreTable(new LinkedList<String> (), new LinkedList<Integer>());
+			System.out.println("puntuaciones");
 		}
 	}
 	

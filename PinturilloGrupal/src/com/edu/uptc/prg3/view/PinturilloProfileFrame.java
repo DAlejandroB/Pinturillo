@@ -31,11 +31,12 @@ public class PinturilloProfileFrame extends JFrame {
 	private UserFriendsFrame userFriendsFrame;
 	private PublicLobbyFrame publicLobby;
 	//private PrivateLobby privateLobby;
+	private GameFrame gameFrame;
 	
 	public PinturilloProfileFrame(ActionListener actionListener, String nickName,
 			long globalScore, String iconPath) {
 		super("Pinturillo Social");
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(500,450);
 		this.setLayout(new BorderLayout());
 		menuBar = new ProfileMenuBar(actionListener);
@@ -134,6 +135,14 @@ public class PinturilloProfileFrame extends JFrame {
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
 		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);
 		
+	}
+	
+	public void generateScoreTable(LinkedList<String> nickNames, LinkedList<Integer> scores) {
+		this.gameFrame.generateScoreTable(nickNames, scores);
+	}
+	
+	public void createGameFrame(ActionListener actionListener, boolean isDrawer) {
+		this.gameFrame = new GameFrame(actionListener, isDrawer);
 	}
 	
 	public String getSelectedFriend() {
