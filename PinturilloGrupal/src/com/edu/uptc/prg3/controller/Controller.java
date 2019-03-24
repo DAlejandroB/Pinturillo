@@ -47,11 +47,11 @@ public class Controller implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		switch(command) {
-		case "crear_cuenta":
+		case "crear_cuenta"://listo
 			loginFrame.createAccountDialog(this);
 			break;
-		case "crear_nueva_cuenta":
-				loginFrame.closeCreateAccountDialog();
+		case "crear_nueva_cuenta"://listo
+				this.register();
 				loginFrame.printMessagge("Cuenta registrada exitosamente");
 			break;
 		case "iniciar_sesion":
@@ -89,6 +89,6 @@ public class Controller implements ActionListener{
 	}
 	private void register() {
 		String[] info = loginFrame.getNewAccountData();
-		if(info!=null) sendNewAccountInfo(info);
+		if(info!=null) sendNewAccountInfo(info);		
 	}
 }

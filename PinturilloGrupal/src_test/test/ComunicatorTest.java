@@ -5,8 +5,6 @@ import java.net.UnknownHostException;
 
 import com.edu.uptc.comm.Comunicator;
 
-import sun.security.krb5.internal.HostAddress;
-
 public class ComunicatorTest {
 	public static void main(String[] args) throws UnknownHostException {
 //		Comunicator comm = new Comunicator();
