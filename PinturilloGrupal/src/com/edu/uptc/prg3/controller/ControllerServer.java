@@ -9,13 +9,13 @@ import com.edu.uptc.prg3.view.PinturilloProfileFrame;
 import com.edu.uptc.structure.LinkedList;
 import com.google.gson.Gson;
 
-public class Controller implements ActionListener{
+public class ControllerServer implements ActionListener{
 	private LoginFrame loginFrame;
 	private Comunicator comm;
 	private PinturilloProfileFrame ppFrame;
 	private Gson gsonParser;
 	private String nickName;
-	public Controller(){
+	public ControllerServer(){
 		gsonParser = new Gson();
 		init();
 		comm = new Comunicator();
@@ -105,6 +105,6 @@ public class Controller implements ActionListener{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Controller controller = new Controller();
+		ControllerServer controller = new ControllerServer();
 	}
 }

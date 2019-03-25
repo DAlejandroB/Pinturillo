@@ -33,7 +33,7 @@ public class Comunicator {
 			dos = new DataOutputStream(socket.getOutputStream());
 			dos.writeUTF(message);
 		} catch (IOException e) {
-			System.out.println("Ha habido un problema con el envio de informacion");
+			System.out.println("Ha ocurrido un problema con el envio de informacion");
 			e.printStackTrace();
 		}
 	}
@@ -56,6 +56,9 @@ public class Comunicator {
 	}
 	public void sendRegisterInfo(String nickname, String password, BufferedImage image) {
 		sendMessage("/rgs" + nickname + "/" + password);
+		
+		
+		
 		//TODO crear metodo para enviar no solo nombre y contraseña, pero tambien imagen
 	}
 	public void sendChatMessage(String message) {
