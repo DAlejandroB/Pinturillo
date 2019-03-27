@@ -10,6 +10,10 @@ import com.edu.uptc.prg3.view.dialogs.ScoresTableDialog;
 import com.edu.uptc.structure.LinkedList;
 
 public class GameFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DrawAreaPanel drawAreaPanel;
 	private ChatPanel chatPanel;
 	

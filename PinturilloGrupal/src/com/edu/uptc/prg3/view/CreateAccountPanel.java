@@ -113,7 +113,6 @@ public class CreateAccountPanel extends JPanel implements ActionListener{
         return path;
     }
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("seleccion_icono")) {

@@ -110,8 +110,12 @@ public class LoginFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}	
 	
-	public void printMessagge(String message) {
+	public void printErrorMessagge(String message) {
 		JOptionPane.showMessageDialog( this, message, "error", JOptionPane.ERROR_MESSAGE );
+	}
+	
+	public void printInfoMessage(String message) {
+		JOptionPane.showMessageDialog( this, message, "info", JOptionPane.INFORMATION_MESSAGE );
 	}
 	
 	public String getTxtNickName() {

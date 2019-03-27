@@ -26,17 +26,16 @@ public class ControllerServer implements ActionListener{
 	private void sendNewAccountInfo(String[] accountInfo) {
 		if(accountInfo != null) {
 			comm.sendRegisterInfo(accountInfo[0], accountInfo[1], null);
-//			String recieved = comm.recieveMessage();
-//			switch(recieved) {
-//			case "/scc":
-//				loginFrame.closeCreateAccountDialog();
-//				loginFrame.printMessagge("La cuenta se ha creado exitosamente");
-//				break;
-//			case "/wrn":
-//				loginFrame.printMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
-//				break;
-//			}
-			loginFrame.closeCreateAccountDialog();
+			String recieved = comm.recieveMessage();
+			switch(recieved) {
+			case "/scc":
+				loginFrame.closeCreateAccountDialog();
+				loginFrame.printErrorMessagge("La cuenta se ha creado exitosamente");
+				break;
+			case "/wrn":
+				loginFrame.printErrorMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
+				break;
+			}
 		}
 	}
 	private LinkedList<String> friendList(){
@@ -53,7 +52,7 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "crear_nueva_cuenta"://listo
 				this.register();
-				loginFrame.printMessagge("Cuenta registrada exitosamente");
+				loginFrame.printErrorMessagge("Cuenta registrada exitosamente");
 			break;
 		case "iniciar_sesion":
 			this.nickName = loginFrame.getTxtNickName();
@@ -62,7 +61,7 @@ public class ControllerServer implements ActionListener{
 				loginFrame.dispose();
 			}
 			else 
-				loginFrame.printMessagge("Cuenta no registrada o contraseña incorrecta");
+				loginFrame.printErrorMessagge("Cuenta no registrada o contraseña incorrecta");
 			break;
 		case "ver_amigos":
 			ppFrame.createUserFriendsFrame(this, nickName, friendList());
@@ -90,6 +89,8 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "cerrar_sesion":
 			comm.sendMessage("/lgo" + nickName);
+			this.ppFrame.dispose();
+			this.loginFrame = new LoginFrame(this);
 			break;
 		}
 	}
