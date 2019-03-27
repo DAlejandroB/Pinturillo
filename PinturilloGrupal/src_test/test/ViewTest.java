@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import com.edu.uptc.prg3.view.LoginFrame;
 import com.edu.uptc.prg3.view.PinturilloProfileFrame;
+import com.edu.uptc.prg3.view.PublicLobbyFrame;
 import com.edu.uptc.prg3.view.UserFriendsFrame;
 import com.edu.uptc.structure.LinkedList;
 
@@ -19,9 +20,9 @@ public class ViewTest {
 //			}
 //		}, "", 0, null);
 //		
-//		LinkedList<String> names = new LinkedList<>();
-//		names.add("juana");
-//		names.add("pepa");
+		LinkedList<String> names = new LinkedList<>();
+		names.add("juana");
+		names.add("pepa");
 //		UserFriendsFrame frame1 = new UserFriendsFrame(new ActionListener() {
 //			
 //			@Override
@@ -31,5 +32,6 @@ public class ViewTest {
 //			}
 //		}, "USUARIO", names);
 //		
+		PublicLobbyFrame plf = new PublicLobbyFrame(null, 120, names);
 	}
 }

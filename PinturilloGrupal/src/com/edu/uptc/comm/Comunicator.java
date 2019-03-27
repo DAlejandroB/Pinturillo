@@ -47,11 +47,18 @@ public class Comunicator {
 		String loginInfo = "/lgn" + nickname + "," + password;
 		sendMessage(loginInfo);
 	}
-	
+	public int recieveNumber() {
+		int r = 0;
+		try {
+			r = dis.readInt();
+		}catch (Exception e) {}
+		return r;
+	}
 	public String recieveMessage() {
 		String message = "";
 		try {
 			message =  dis.readUTF();
+			System.out.println(message);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

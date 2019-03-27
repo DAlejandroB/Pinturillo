@@ -84,9 +84,9 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "crear_sala_privada":
 			if(createPrivateRoom()) {
-				
+				//TODO
 			}else {
-				//TODO imprimir en la vista que el id ya esta siendo usado
+				ppFrame.printErrorMessagge("La id ya está siendo utilizada, ingrese otra porfavor");
 			}
 			break;
 		case "cerrar_sesion":
@@ -95,9 +95,51 @@ public class ControllerServer implements ActionListener{
 			this.loginFrame = new LoginFrame(this);
 			break;
 		case "entrar_sala_privada":
-			comm.sendMessage("/joi" + Long.toString(ppFrame.enterToPrivateRoom()));
+			if(joinPrivateRoom()){
+				//TODO
+			}else {
+				ppFrame.printErrorMessagge("No existe una sala con ese ID, ingrese un id existente");
+			}
+			break;
+		case "entrar_sala_publica":
+			if(joinPublicRoom()) {
+				System.out.println("Creando sala");
+				int s = readSeconds();
+				LinkedList<String> playerList = fillPlayers();
+				ppFrame.createPublicLobbyFrame(this, s, playerList);
+				System.out.println("Sala creada");
+			}else {
+				ppFrame.printErrorMessagge("Ha ocurrido un error, por favor intentelo de nuevo");
+			}
 			break;
 		}
+	}
+	private LinkedList<String> fillPlayers() {
+		String[] players = comm.recieveMessage().split(",");
+		LinkedList<String> playerList = new LinkedList<>();
+		for (String nickname : players) {
+			playerList.add(nickname);
+		}
+		return playerList;
+	}
+	private int readSeconds() {
+		int r = -1;
+		try {
+			r = comm.recieveNumber();
+		}catch(NumberFormatException e) {}
+		return r;
+	}
+	private boolean joinPublicRoom() {
+		comm.sendMessage("/jpu" + nickName);
+		String recieved = comm.recieveMessage();
+		System.out.println("Conectado a sala");
+		return (recieved.equals("scc"));
+	}
+	private boolean joinPrivateRoom() {
+		comm.sendMessage("/jpr" + nickName+"," +  Long.toString(ppFrame.enterToPrivateRoom()));
+		String recieved = comm.recieveMessage();
+		System.out.println(recieved);
+		return(recieved.equals("scc"));
 	}
 	private boolean createPrivateRoom() {
 		comm.sendMessage("/crt" + nickName + "," + Long.toString(ppFrame.createPrivateRoom()));
