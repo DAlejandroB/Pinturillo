@@ -38,7 +38,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 	public LoginFrame(ActionListener actionListener) {
 		super("Pinturillo Inicio de Sesion");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setSize(500,400);
+		this.setSize(500,400); 
 		this.setLayout(new BorderLayout());
 		panelImg = new TitleImagePanel();
 		this.add(panelImg, BorderLayout.NORTH);

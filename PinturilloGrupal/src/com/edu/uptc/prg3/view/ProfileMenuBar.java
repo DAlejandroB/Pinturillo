@@ -1,6 +1,4 @@
 package com.edu.uptc.prg3.view;
-
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;

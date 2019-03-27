@@ -47,6 +47,7 @@ public class Comunicator {
 		String loginInfo = "/lgn" + nickname + "," + password;
 		sendMessage(loginInfo);
 	}
+	
 	public String recieveMessage() {
 		String message = "";
 		try {
