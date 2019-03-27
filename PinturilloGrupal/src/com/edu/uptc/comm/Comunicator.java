@@ -11,11 +11,18 @@ import com.edu.uptc.structure.LinkedList;
 
 public class Comunicator {
 	private static final int PORT = 10345;
-	private static final String SERVER_IP = "192.168.0.4";
+	private static final String SERVER_IP = "192.168.0.7";
 	private DataInputStream dis;
 	private DataOutputStream dos;
-	
+	private Socket socket;
 	public Comunicator(){
+		try {
+			socket = new Socket(SERVER_IP, PORT);
+			dis = new DataInputStream(socket.getInputStream());
+			dos = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String requestFriendsList(String nickname){
@@ -29,8 +36,6 @@ public class Comunicator {
 	
 	public void sendMessage(String message) {
 		try {
-			Socket socket = new Socket(SERVER_IP,PORT);
-			dos = new DataOutputStream(socket.getOutputStream());
 			dos.writeUTF(message);
 		} catch (IOException e) {
 			System.out.println("Ha ocurrido un problema con el envio de informacion");
@@ -38,16 +43,12 @@ public class Comunicator {
 		}
 	}
 	public void sendLoginInfo(String nickname, String password) {
-		String loginInfo = "/lgn" + nickname + "/" + password;
+		String loginInfo = "/lgn" + nickname + "," + password;
 		sendMessage(loginInfo);
 	}
 	public String recieveMessage() {
-		Socket socket;
 		String message = "";
 		try {
-			socket = new Socket(SERVER_IP, PORT);
-			System.out.println(socket.isConnected());
-			dis = new DataInputStream(socket.getInputStream());
 			message =  dis.readUTF();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,10 +56,7 @@ public class Comunicator {
 		return message;
 	}
 	public void sendRegisterInfo(String nickname, String password, BufferedImage image) {
-		sendMessage("/rgs" + nickname + "/" + password);
-		
-		
-		
+		sendMessage("/rgs" + nickname + "," + password);
 		//TODO crear metodo para enviar no solo nombre y contraseña, pero tambien imagen
 	}
 	public void sendChatMessage(String message) {

@@ -26,16 +26,17 @@ public class ControllerServer implements ActionListener{
 	private void sendNewAccountInfo(String[] accountInfo) {
 		if(accountInfo != null) {
 			comm.sendRegisterInfo(accountInfo[0], accountInfo[1], null);
-			String recieved = comm.recieveMessage();
-			switch(recieved) {
-			case "/scc":
-				loginFrame.closeCreateAccountDialog();
-				loginFrame.printMessagge("La cuenta se ha creado exitosamente");
-				break;
-			case "/wrn":
-				loginFrame.printMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
-				break;
-			}
+//			String recieved = comm.recieveMessage();
+//			switch(recieved) {
+//			case "/scc":
+//				loginFrame.closeCreateAccountDialog();
+//				loginFrame.printMessagge("La cuenta se ha creado exitosamente");
+//				break;
+//			case "/wrn":
+//				loginFrame.printMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
+//				break;
+//			}
+			loginFrame.closeCreateAccountDialog();
 		}
 	}
 	private LinkedList<String> friendList(){
@@ -56,8 +57,10 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "iniciar_sesion":
 			this.nickName = loginFrame.getTxtNickName();
-			if(login())
+			if(login()) {
 				ppFrame = new PinturilloProfileFrame(this, nickName, 0, "");
+				loginFrame.dispose();
+			}
 			else 
 				loginFrame.printMessagge("Cuenta no registrada o contraseña incorrecta");
 			break;
@@ -93,7 +96,7 @@ public class ControllerServer implements ActionListener{
 	private boolean login() {
 		comm.sendLoginInfo(loginFrame.getTxtNickName(), loginFrame.getTxtPassword());
 		String recieved = comm.recieveMessage();
-		return (recieved == "lgs");
+		return (recieved.equals("scc"));
 	}
 	private void register() {
 		String[] info = loginFrame.getNewAccountData();
