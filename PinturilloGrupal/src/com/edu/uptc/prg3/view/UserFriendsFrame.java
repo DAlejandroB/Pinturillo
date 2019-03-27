@@ -118,7 +118,7 @@ public class UserFriendsFrame extends JFrame{
 	}
 	
 	public String addNewFriend() {
-		return JOptionPane.showInputDialog("Ingrese el nickName del usuario: ");	
+		return JOptionPane.showInputDialog("Ingrese el nick name del usuario: ");	
 	}
 	
 	public void generateFriendNotFoundMessage() {

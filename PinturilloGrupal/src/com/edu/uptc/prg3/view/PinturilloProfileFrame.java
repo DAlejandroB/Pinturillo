@@ -202,6 +202,40 @@ public class PinturilloProfileFrame extends JFrame {
 		return data;
 	}
 	
+	/**
+	 * Creates a dialog, for number input for a new private room id
+	 * @return
+	 */
+	public long createPrivateRoom() {
+		long idPrivateRoom = -1;
+		String answer = JOptionPane.showInputDialog("Ingrese un id para la sala privada: ");	
+		if(answer!="") {
+			try {
+				idPrivateRoom = Long.valueOf(answer);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(this, "Solo números son válidos");
+			}			
+		}else JOptionPane.showMessageDialog(this, "Campo vacío");
+		return idPrivateRoom;
+	}
+	
+	public void roomNotFoundDialog() {
+		JOptionPane.showMessageDialog(this, "Error 404: Sala no encontrada");
+	}
+	
+	public long enterToPrivateRoom() {
+		long idPrivateRoom = -1;
+		String answer = JOptionPane.showInputDialog("Ingrese el id de la sala privada: ");
+		if(answer!="") {
+			try {
+				idPrivateRoom = Long.valueOf(answer);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(this, "Solo números son válidos");
+			}			
+		}else JOptionPane.showMessageDialog(this, "Campo vacío");
+		return idPrivateRoom;
+	}
+	
 	public void closeModDialog() {
 		this.modInfoDialog.dispose();
 	}

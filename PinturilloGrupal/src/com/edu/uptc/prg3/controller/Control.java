@@ -54,7 +54,7 @@ public class Control implements ActionListener {
 				if(operationStatus.substring(0, 3) == "/scc") {
 					//TODO comunicar la creacion del usuario al cliente
 				}else if(operationStatus.substring(0, 3) == "/wrn") {
-					logFrame.printMessagge("El nombre de usuario ya se encuentra en uso.");
+					logFrame.printErrorMessagge("El nombre de usuario ya se encuentra en uso.");
 					//TODO comunicar que el nombre de usuario ya está ocupado
 				}else logFrame.closeCreateAccountDialog();
 			}
@@ -88,9 +88,16 @@ public class Control implements ActionListener {
 			this.profileFrame.createPublicLobbyFrame(this, 60, new LinkedList<String>());
 			this.profileFrame.createGameFrame(this, true);
 		}else if(e.getActionCommand().equals("entrar_sala_privada")) {
-			
+			long idRoom = this.profileFrame.enterToPrivateRoom();
+			if(idRoom!=-1) {
+				//si no se encuentra la sala..
+				this.profileFrame.roomNotFoundDialog();
+			}
 		}else if(e.getActionCommand().equals("crear_sala_privada")) {
-			
+			long idRoom = this.profileFrame.createPrivateRoom();
+			if(idRoom!=-1) {
+				//metodo de crear sala privada
+			}
 		}else if(e.getActionCommand().equals("mostrar_puntuaciones")) {
 			this.profileFrame.generateScoreTable(new LinkedList<String> (), new LinkedList<Integer>());
 		}else if(e.getActionCommand().equals("borrar_amigo")) {

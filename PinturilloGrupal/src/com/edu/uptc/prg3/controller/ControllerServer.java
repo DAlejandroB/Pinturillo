@@ -30,10 +30,10 @@ public class ControllerServer implements ActionListener{
 			switch(recieved) {
 			case "/scc":
 				loginFrame.closeCreateAccountDialog();
-				loginFrame.printMessagge("La cuenta se ha creado exitosamente");
+				loginFrame.printErrorMessagge("La cuenta se ha creado exitosamente");
 				break;
 			case "/wrn":
-				loginFrame.printMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
+				loginFrame.printErrorMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
 				break;
 			}
 		}
@@ -52,14 +52,14 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "crear_nueva_cuenta"://listo
 				this.register();
-				loginFrame.printMessagge("Cuenta registrada exitosamente");
+				loginFrame.printErrorMessagge("Cuenta registrada exitosamente");
 			break;
 		case "iniciar_sesion":
 			this.nickName = loginFrame.getTxtNickName();
 			if(login())
 				ppFrame = new PinturilloProfileFrame(this, nickName, 0, "");
 			else 
-				loginFrame.printMessagge("Cuenta no registrada o contraseña incorrecta");
+				loginFrame.printErrorMessagge("Cuenta no registrada o contraseña incorrecta");
 			break;
 		case "ver_amigos":
 			ppFrame.createUserFriendsFrame(this, nickName, friendList());
@@ -87,6 +87,8 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "cerrar_sesion":
 			comm.sendMessage("/lgo" + nickName);
+			this.ppFrame.dispose();
+			this.loginFrame = new LoginFrame(this);
 			break;
 		}
 	}
