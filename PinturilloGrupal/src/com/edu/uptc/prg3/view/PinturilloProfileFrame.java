@@ -122,6 +122,14 @@ public class PinturilloProfileFrame extends JFrame {
 		this.userFriendsFrame = new UserFriendsFrame(actionListener, userNick, friendsName);
 	}
 	
+	public void printErrorMessagge(String message) {
+		JOptionPane.showMessageDialog( this, message, "error", JOptionPane.ERROR_MESSAGE );
+	}
+	
+	public void printInfoMessage(String message) {
+		JOptionPane.showMessageDialog( this, message, "info", JOptionPane.INFORMATION_MESSAGE );
+	}
+	
 	public void setFriendInfo(String nickName, long globalScore, String status) {
 		this.userFriendsFrame.setFriendInfo(nickName, globalScore, status);
 	}

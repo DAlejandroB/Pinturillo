@@ -19,7 +19,7 @@ public class ModifyInfoPanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JLabel lblNickName, lblPassword, lblRPassword, lblIcon;
 	private JTextField txtNick, txtPassword, txtRPassword;
-	private JButton btnSelectIcon, btnCreate, btnCancel;
+	private JButton btnSelectIcon, btnModify, btnCancel;
 	private JLabel imageIcon;
 	private String iconPath;
 	private ModifyInfoDialog dialog;
@@ -81,12 +81,12 @@ public class ModifyInfoPanel extends JPanel implements ActionListener{
 		gbc.gridy=4;
 		this.add(imageIcon, gbc);
 		
-		btnCreate = new JButton("Modificar cuenta");
-		btnCreate.addActionListener(actionListener);
-		btnCreate.setActionCommand("modificar_cuenta");
+		btnModify = new JButton("Modificar cuenta");
+		btnModify.addActionListener(actionListener);
+		btnModify.setActionCommand("modificar_cuenta");
 		gbc.gridx=0;
 		gbc.gridy=5;
-		this.add(btnCreate, gbc);
+		this.add(btnModify, gbc);
 		
 		btnCancel = new JButton("Cancelar");
 		btnCancel.addActionListener(this);

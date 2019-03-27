@@ -100,7 +100,7 @@ public class UserFriendsFrame extends JFrame{
 	}
 	
 	/**
-	 * Creates a confirmDialog with a message
+	 * Creates a confirmDialog for the delete friend option
 	 * @param message the message to ask in the dialog
 	 * @return 1 if the answer is 'OK', 2 in another case
 	 */
