@@ -75,8 +75,10 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "amigo_seleccionado":
 			String selectedFriend = ppFrame.getSelectedFriend();
+			if(selectedFriend!="")
+				ppFrame.setFriendInfo(selectedFriend, 0, "online");
 			//metodo que busca un usuario por su nickName, y retorna su nickName, puntaje global y status
-			ppFrame.setFriendInfo(selectedFriend, 0, "online"); //en 0 el puntaje y en "online" el status
+			 //en 0 el puntaje y en "online" el status
 			break;
 		case "modificar_info":
 			break;
@@ -114,6 +116,7 @@ public class ControllerServer implements ActionListener{
 			break;
 		}
 	}
+	
 	private LinkedList<String> fillPlayers() {
 		String[] players = comm.recieveMessage().split(",");
 		LinkedList<String> playerList = new LinkedList<>();
