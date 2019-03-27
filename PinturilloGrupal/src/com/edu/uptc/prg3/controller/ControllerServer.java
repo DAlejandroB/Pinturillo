@@ -27,12 +27,13 @@ public class ControllerServer implements ActionListener{
 		if(accountInfo != null) {
 			comm.sendRegisterInfo(accountInfo[0], accountInfo[1], null);
 			String recieved = comm.recieveMessage();
+			System.out.println(recieved);
 			switch(recieved) {
-			case "/scc":
+			case "scc":
 				loginFrame.closeCreateAccountDialog();
-				loginFrame.printErrorMessagge("La cuenta se ha creado exitosamente");
+				loginFrame.printInfoMessage("Cuenta registrada exitosamente");
 				break;
-			case "/wrn":
+			case "wrn":
 				loginFrame.printErrorMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
 				break;
 			}
@@ -46,13 +47,13 @@ public class ControllerServer implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+		System.out.println(command);
 		switch(command) {
 		case "crear_cuenta"://listo
 			loginFrame.createAccountDialog(this);
 			break;
 		case "crear_nueva_cuenta"://listo
 				this.register();
-				loginFrame.printErrorMessagge("Cuenta registrada exitosamente");
 			break;
 		case "iniciar_sesion":
 			this.nickName = loginFrame.getTxtNickName();
@@ -82,17 +83,26 @@ public class ControllerServer implements ActionListener{
 		case "eliminar_cuenta":
 			break;
 		case "crear_sala_privada":
-			comm.sendMessage("/crtPrivate");
-			break;
-		case "crear_sala_publica":
-			comm.sendMessage("/crtPublic");
+			if(createPrivateRoom()) {
+				
+			}else {
+				//TODO imprimir en la vista que el id ya esta siendo usado
+			}
 			break;
 		case "cerrar_sesion":
 			comm.sendMessage("/lgo" + nickName);
 			this.ppFrame.dispose();
 			this.loginFrame = new LoginFrame(this);
 			break;
+		case "entrar_sala_privada":
+			comm.sendMessage("/joi" + Long.toString(ppFrame.enterToPrivateRoom()));
+			break;
 		}
+	}
+	private boolean createPrivateRoom() {
+		comm.sendMessage("/crt" + nickName + "," + Long.toString(ppFrame.createPrivateRoom()));
+		String recieved = comm.recieveMessage();
+		return (recieved.equals("scc"));
 	}
 	private boolean login() {
 		comm.sendLoginInfo(loginFrame.getTxtNickName(), loginFrame.getTxtPassword());

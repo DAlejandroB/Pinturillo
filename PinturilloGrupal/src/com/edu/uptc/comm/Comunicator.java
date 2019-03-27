@@ -15,6 +15,7 @@ public class Comunicator {
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	private Socket socket;
+	
 	public Comunicator(){
 		try {
 			socket = new Socket(SERVER_IP, PORT);
