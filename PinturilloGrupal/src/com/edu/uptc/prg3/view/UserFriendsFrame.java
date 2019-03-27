@@ -23,6 +23,10 @@ import com.edu.uptc.structure.LinkedList;
 import com.edu.uptc.structure.Node;
 
 public class UserFriendsFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel friendsPanel, friendSettingsPanel, friendInfoPanel, buttonsPanel;
 	private JComboBox<String> friendsUserList;
 	private JTextPane txtFriendInfo;
@@ -126,16 +130,6 @@ public class UserFriendsFrame extends JFrame{
 												JOptionPane.ERROR_MESSAGE);
 	}
 	
-	/**
-	 * Método que centra el frame 
-	 */
-	private void center() {
-        Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );
-        int xEdge = ( screen.width - getWidth( ) ) / 2;
-        int yEdge = ( screen.height - getHeight( ) ) / 2;
-        setLocation( xEdge, yEdge );
-    }
-	
 	public void fillFriendsLists(LinkedList<String> friendsName) {
 		if(!friendsName.isEmpty()) {
 			Node<String> aux = friendsName.getHead();
@@ -144,6 +138,16 @@ public class UserFriendsFrame extends JFrame{
 				aux = aux.getNext();
 			}
 		}
+	}
+	
+	/**
+	 * Método que centra el frame 
+	 */
+	private void center() {
+        Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );
+        int xEdge = ( screen.width - getWidth( ) ) / 2;
+        int yEdge = ( screen.height - getHeight( ) ) / 2;
+        setLocation( xEdge, yEdge );
 	}
 	
 }

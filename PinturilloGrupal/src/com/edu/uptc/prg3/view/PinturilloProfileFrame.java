@@ -16,8 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import com.edu.uptc.prg3.view.dialogs.CreateAccountDialog;
 import com.edu.uptc.prg3.view.dialogs.ModifyInfoDialog;
 import com.edu.uptc.structure.LinkedList;
 
@@ -208,6 +206,18 @@ public class PinturilloProfileFrame extends JFrame {
 			}
 		}
 		return data;
+	}
+	
+	public String selectAWord(String word1, String word2, String word3) {
+		return this.gameFrame.selectAWord(word1, word2, word3);
+	}
+	
+	/**
+	 * Show a dialog to confirm that a player wants to join to a private game room
+	 * @return 1 if the answer is OK, 2 in another case
+	 */
+	public int generateInvitationToPrivateRoomDialog() {
+		return this.generateQuestionDialog("Has sido invitado a una sala privada.\nDeseas entrar?");
 	}
 	
 	/**

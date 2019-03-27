@@ -18,6 +18,10 @@ import com.edu.uptc.structure.LinkedList;
 import com.edu.uptc.structure.Node;
 
 public class PublicLobbyFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lblPlayers;
 	private JTextPane txtNickPlayers;
 	private JLabel lblInfoCounter;
