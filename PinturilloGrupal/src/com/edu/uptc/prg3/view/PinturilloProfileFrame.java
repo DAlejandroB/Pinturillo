@@ -20,9 +20,7 @@ import com.edu.uptc.prg3.view.dialogs.ModifyInfoDialog;
 import com.edu.uptc.structure.LinkedList;
 
 public class PinturilloProfileFrame extends JFrame {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private ProfileMenuBar menuBar;
 	private JPanel userInfoPanel, buttonsPanel;
@@ -30,7 +28,7 @@ public class PinturilloProfileFrame extends JFrame {
 	private JButton btnPublicRoom, btnPrivateRoom, btnCreatePrivateRoom;
 	private UserFriendsFrame userFriendsFrame;
 	private PublicLobbyFrame publicLobby;
-	//private PrivateLobby privateLobby;
+	private PrivateLobbyFrame privateLobby;
 	private GameFrame gameFrame;
 	private ModifyInfoDialog modInfoDialog;
 	
@@ -209,14 +207,15 @@ public class PinturilloProfileFrame extends JFrame {
 	 * @param roomPlayers The players that log in the lobby
 	 */
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
-<<<<<<< HEAD
-		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);		
-=======
-		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);	
+		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);			
 	}
+	
+	public void createPrivateLobbyFrame(ActionListener actionListener, LinkedList<String> roomPlayers, boolean isTheLeader) {
+		this.privateLobby = new PrivateLobbyFrame(actionListener, roomPlayers, isTheLeader);
+	}
+	
 	public void updateLobbyTime(int seconds) {
 		publicLobby.updateTime(seconds);
->>>>>>> branch 'master' of https://github.com/DAlejandroB/Pinturillo.git
 	}
 	/**
 	 * Calls the generateScoreTable method of the gameFrame
