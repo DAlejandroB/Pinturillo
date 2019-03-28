@@ -22,9 +22,7 @@ import javax.swing.JTextField;
 import com.edu.uptc.prg3.view.dialogs.CreateAccountDialog;
 
 public class LoginFrame extends JFrame implements ActionListener{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private TitleImagePanel panelImg;
 	private JPanel panelLoginInf;
@@ -110,10 +108,18 @@ public class LoginFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}	
 	
+	/**
+	 * Show an error dialog with a personalized message
+	 * @param message the message to be showed
+	 */
 	public void printErrorMessagge(String message) {
 		JOptionPane.showMessageDialog( this, message, "error", JOptionPane.ERROR_MESSAGE );
 	}
 	
+	/**
+	 * Show an information dialog with a personalized message
+	 * @param message the message to be showed
+	 */
 	public void printInfoMessage(String message) {
 		JOptionPane.showMessageDialog( this, message, "info", JOptionPane.INFORMATION_MESSAGE );
 	}
@@ -123,10 +129,9 @@ public class LoginFrame extends JFrame implements ActionListener{
 	}
 	
 	/**
-	 * Obtiene el texto escrito en el campo de contraseña.  
-	 * Luego elimina el contenido del componente por seguridad
-	 * Nota: No se usa getText() para objetos JPasswordField, es obsoleto.
-	 * @return un string con la contraseña ingresada 
+	 * Gets the written text in the password field. 
+	 * Later, deletes the info in the component for more security
+	 * @return a string with the written password
 	 */
 	public String getTxtPassword() {
 		String pass = String.valueOf(txtPassword.getPassword());
@@ -134,20 +139,27 @@ public class LoginFrame extends JFrame implements ActionListener{
 		return pass;
 	}
 	
+	/**
+	 * Closes the current create account dialog
+	 */
 	public void closeCreateAccountDialog() {
 		if(this.dialog!=null) this.dialog.dispose();
 	}
 
+	/**
+	 * Creates a new create account dialog 
+	 * @param actionListener an action listener object for the events
+	 */
 	public void createAccountDialog(ActionListener actionListener) {
 		this.dialog = new CreateAccountDialog(this, actionListener);
 		this.dialog.setVisible(true);
 	}
 	
 	/**
-	 * Método que obtiene los datos ingresados en el dialogo de nueva cuenta.
-	 * Almacena los datos en un arreglo de strings con el siguiente orden: 
-	 * 1. NickName 2. Password 3. Ruta del icono
-	 * @return un arreglo de strings con la informacion del nuevo usuario.
+	 * Gets the entered data in the new account dialog. Then, saves the data in a string array 
+	 * with the next order:
+	 * 1. NickName 2. Password 3. Icon path
+	 * @return a string array with the new user information
 	 */
 	public String[] getNewAccountData() {
 		String data[] = null;
@@ -168,7 +180,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * Método que centra el frame 
+	 * This method centers the frame
 	 */
 	private void center() {
         Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );

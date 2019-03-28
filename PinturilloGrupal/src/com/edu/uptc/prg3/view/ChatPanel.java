@@ -58,6 +58,12 @@ public class ChatPanel extends JPanel{
 		this.add(buttonPanel, gbc);
 	}
 	
+	/**
+	 * Generates a text field for input comments, and put other components only if the local user,
+	 * isn´t the drawer of the round
+	 * @param gbc The gridBagConstraints of the chat panel
+	 * @param actionListener an actionListener object for the created events
+	 */
 	private void generateCustomChat(GridBagConstraints gbc, ActionListener actionListener) {
 		if(!isDrawer) {
 			txtEnterChat = new JTextField();
@@ -94,13 +100,21 @@ public class ChatPanel extends JPanel{
 			buttonPanel.add(btnReport, BorderLayout.WEST);
 		}
 	}
-	
+		
+	/**
+	 * Reads the recently message entered in the chat
+	 * @return a string with the readed message
+	 */
 	public String readMessage() {
 		String message = this.txtEnterChat.getText();
 		this.txtEnterChat.setText("");
 		return message;
 	}
 	
+	/**
+	 * Adds a new message to the whole current chat
+	 * @param info the new message to be written
+	 */
 	public void setMessage(String info) {
 		this.txtChat.setText(txtChat.getText()+"\n"+info);
 	}

@@ -99,9 +99,8 @@ public class CreateAccountPanel extends JPanel implements ActionListener{
 	
 	
 	/**
-	 * Método que abre un objeto de la clase JFileChooser, y permite seleccionar un 
-	 * icono de la carpeta Icons
-	 * @return la ruta del icono seleccionado
+	 * Opens a JFileChooser object, and let chooses an icon of the icons Folder
+	 * @return the selected icon path
 	 */
 	public String getPath() {
     	String path="";

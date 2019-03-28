@@ -15,9 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class DrawAreaPanel extends JPanel implements ActionListener{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private DrawPanel drawPanel;
 	private JPanel colorsPanel;
@@ -119,6 +117,10 @@ public class DrawAreaPanel extends JPanel implements ActionListener{
 		this.add(colorsPanel, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * Calls the flipDrawer method of the drawPanel, and flips the state of the player in the game
+	 * @param isDrawer boolean that indicates if the player is or isn´t the current drawer
+	 */
 	public void flipDrawer(boolean isDrawer) {
 		this.drawPanel.flipDrawer(isDrawer);
 	}

@@ -8,9 +8,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JPanel;
 
 public class DrawPanel extends JPanel{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private static final int NUM_POINTS=5000;
 	private Point[] coords;

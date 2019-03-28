@@ -98,7 +98,7 @@ public class PublicLobbyFrame extends JFrame{
 	}
 	
 	/**
-	 * Método que centra el frame 
+	 * Centers the frame
 	 */
 	private void center() {
         Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );
