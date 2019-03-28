@@ -91,8 +91,8 @@ public class PublicLobbyFrame extends JFrame {
 	 * @param currentTime the current seconds of the public room
 	 */
 	public void updateTime(int currentTime) {
-		lblInfoCounter.setText("La partida se iniciará en: "+currentTime
-				+" segundos, o cuando se complete el cupo máximo");
+		lblInfoCounter.setText(/*"La partida se iniciará en: "*/""+currentTime
+			/*	+" segundos, o cuando se complete el cupo máximo"*/);
 	}
 	
 	/**

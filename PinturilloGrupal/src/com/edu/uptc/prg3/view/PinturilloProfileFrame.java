@@ -209,7 +209,14 @@ public class PinturilloProfileFrame extends JFrame {
 	 * @param roomPlayers The players that log in the lobby
 	 */
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
+<<<<<<< HEAD
 		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);		
+=======
+		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);	
+	}
+	public void updateLobbyTime(int seconds) {
+		publicLobby.updateTime(seconds);
+>>>>>>> branch 'master' of https://github.com/DAlejandroB/Pinturillo.git
 	}
 	/**
 	 * Calls the generateScoreTable method of the gameFrame
@@ -271,6 +278,7 @@ public class PinturilloProfileFrame extends JFrame {
 				}
 			}
 		}
+		modInfoDialog.dispose();
 		return data;
 	}
 	
