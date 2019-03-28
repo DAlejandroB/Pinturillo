@@ -6,9 +6,7 @@ import java.awt.event.ActionListener;
 import com.edu.uptc.comm.Comunicator;
 import com.edu.uptc.prg3.view.LoginFrame;
 import com.edu.uptc.prg3.view.PinturilloProfileFrame;
-import com.edu.uptc.prg3.view.UserFriendsFrame;
 import com.edu.uptc.structure.LinkedList;
-import com.google.gson.Gson;
 
 public class ControllerServer implements ActionListener{
 	private LoginFrame loginFrame;
