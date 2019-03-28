@@ -20,9 +20,11 @@ public class ControllerServer implements ActionListener{
 		init();
 		comm = new Comunicator();
 	}
+	
 	private void init() {
 		loginFrame = new LoginFrame(this);
 	}
+	
 	private void sendNewAccountInfo(String[] accountInfo) {
 		if(accountInfo != null) {
 			comm.sendRegisterInfo(accountInfo[0], accountInfo[1], null);

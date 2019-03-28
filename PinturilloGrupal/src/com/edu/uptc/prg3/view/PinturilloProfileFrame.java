@@ -209,8 +209,7 @@ public class PinturilloProfileFrame extends JFrame {
 	 * @param roomPlayers The players that log in the lobby
 	 */
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
-		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);
-		
+		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);		
 	}
 	/**
 	 * Calls the generateScoreTable method of the gameFrame
