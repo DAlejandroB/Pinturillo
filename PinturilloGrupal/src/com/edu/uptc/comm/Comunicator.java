@@ -6,22 +6,24 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import com.edu.uptc.prg3.controller.ControllerServer;
 import com.edu.uptc.structure.LinkedList;
 
 
 public class Comunicator {
 	private static final int PORT = 10345;
-//	private static final String SERVER_IP = "192.168.0.7"; diego
-	private static final String SERVER_IP = "192.168.0.41";
+	private static final String SERVER_IP = "192.168.0.7";
+//	private static final String SERVER_IP = "192.168.0.41";
 	private DataInputStream dis;
+	private DataInputStream disCommands;
 	private DataOutputStream dos;
 	private Socket socket;
-	
 	public Comunicator(){
 		try {
 			socket = new Socket(SERVER_IP, PORT);
 			dis = new DataInputStream(socket.getInputStream());
 			dos = new DataOutputStream(socket.getOutputStream());
+			disCommands = new DataInputStream(socket.getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,8 +57,7 @@ public class Comunicator {
 	public String recieveMessage() {
 		String message = "";
 		try {
-			message =  dis.readUTF();
-			System.out.println(message);
+			message = dis.readUTF();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

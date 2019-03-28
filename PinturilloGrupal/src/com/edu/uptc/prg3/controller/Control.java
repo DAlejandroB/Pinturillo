@@ -17,28 +17,27 @@ public class Control implements ActionListener {
 	 */
 	public Control() {
 		logFrame = new LoginFrame(this);
-		comm = new Comunicator();
 	}
 
 	/**
 	 * Comandos de la vista
 	 * mostrar_puntuaciones
 	 * mensaje_enviado
-	 * reportar
+	 * reportar					
 	 * crear_nueva_cuenta		listo
 	 * iniciar_sesion			listo
 	 * crear_cuenta				listo
 	 * entrar_sala_publica		listo
 	 * entrar_sala_privada		listo
 	 * crear_sala_privada		listo
-	 * ver_amigos
-	 * modificar_info
-	 * eliminar_cuenta
-	 * cerrar_sesion
+	 * ver_amigos				listo
+	 * modificar_info			listo
+	 * eliminar_cuenta			
+	 * cerrar_sesion			listo
 	 * abandonar_sala_publica
 	 * amigo_seleccionado //muestra info del amigo seleccionado
-	 * borrar_amigo
-	 * añadir_amigo
+	 * borrar_amigo				listo
+	 * añadir_amigo				listo
 	 * 
 	 */
 	

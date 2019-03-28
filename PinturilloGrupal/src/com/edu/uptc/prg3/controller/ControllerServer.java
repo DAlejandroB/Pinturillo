@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import com.edu.uptc.comm.Comunicator;
 import com.edu.uptc.prg3.view.LoginFrame;
 import com.edu.uptc.prg3.view.PinturilloProfileFrame;
+import com.edu.uptc.prg3.view.UserFriendsFrame;
 import com.edu.uptc.structure.LinkedList;
 import com.google.gson.Gson;
 
@@ -13,10 +14,8 @@ public class ControllerServer implements ActionListener{
 	private LoginFrame loginFrame;
 	private Comunicator comm;
 	private PinturilloProfileFrame ppFrame;
-	private Gson gsonParser;
 	private String nickName;
 	public ControllerServer(){
-		gsonParser = new Gson();
 		init();
 		comm = new Comunicator();
 	}
@@ -74,8 +73,11 @@ public class ControllerServer implements ActionListener{
 		case "borrar_amigo":
 			String nickNameFriend = ppFrame.getSelectedFriend();
 			if(this.ppFrame.deleteFriendResponse()==1) {
-				//metodo para eliminar un amigo por su nickName
-			}			
+				if(deleteFriend(nickNameFriend)) {
+					ppFrame.printInfoMessage("Amigo eliminado de su lista de amigos");
+				}else
+					ppFrame.printErrorMessagge("No se encuentra un usuario con ese nickname");
+			}
 			break;
 		case "amigo_seleccionado":
 			String selectedFriend = ppFrame.getSelectedFriend();
@@ -84,6 +86,10 @@ public class ControllerServer implements ActionListener{
 				ppFrame.setFriendInfo(selectedFriend, 0, "online"); //en 0 el puntaje y en "online" el status
 			}break;
 		case "modificar_info":
+			ppFrame.createModInfoDialog(this, nickName, "");
+			break;
+		case "modificar_cuenta":
+			this.modifyInfo(ppFrame.getModAccountData());
 			break;
 		case "eliminar_cuenta":
 			break;
@@ -108,18 +114,51 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "entrar_sala_publica":
 			if(joinPublicRoom()) {
-				System.out.println("Creando sala");
 				int s = readSeconds();
 				LinkedList<String> playerList = fillPlayers();
 				ppFrame.createPublicLobbyFrame(this, s, playerList);
-				System.out.println("Sala creada");
+				Thread counter = new Thread(new Runnable() {
+					int i = s;
+					@Override
+					public void run() {
+						while(i > 0) {
+							i = comm.recieveNumber();
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {}
+							ppFrame.updateLobbyTime(i);
+						}
+						initGame();
+					}
+				});
+				counter.start();
 			}else {
 				ppFrame.printErrorMessagge("Ha ocurrido un error, por favor intentelo de nuevo");
 			}
 			break;
+		case "añadir_amigo":
+			if(addNewFriend(ppFrame.addNewFriend())) {
+				ppFrame.printInfoMessage("El usuario se ha agregado a la lista de amigos");
+			}
 		}
 	}
-	
+	private void initGame() {
+		ppFrame.createGameFrame(this, true);
+	}
+	private void modifyInfo(String[] newFields) {
+		String fields = nickName + newFields[0] + ","+ newFields[1]  + ","+ newFields[2];
+		comm.sendMessage("/mod" + fields);
+	}
+	private boolean addNewFriend(String nickName) {
+		comm.sendMessage("/add" +this.nickName+ ","+ nickName);
+		String recieved = comm.recieveMessage();
+		return recieved.equals("scc");
+	}
+	private boolean deleteFriend(String friendNickname) {
+		comm.sendMessage("/dlt" +this.nickName+","+friendNickname);
+		String recieved = comm.recieveMessage();
+		return recieved.equals("scc");
+	}
 	private LinkedList<String> fillPlayers() {
 		String[] players = comm.recieveMessage().split(",");
 		LinkedList<String> playerList = new LinkedList<>();
@@ -133,6 +172,7 @@ public class ControllerServer implements ActionListener{
 		try {
 			r = comm.recieveNumber();
 		}catch(NumberFormatException e) {}
+		
 		return r;
 	}
 	private boolean joinPublicRoom() {
@@ -168,5 +208,8 @@ public class ControllerServer implements ActionListener{
 	 */
 	public static void main(String[] args) {
 		ControllerServer controller = new ControllerServer();
+	}
+	public void updateLobbyTime(int parseInt) {
+		ppFrame.updateLobbyTime(parseInt);
 	}
 }

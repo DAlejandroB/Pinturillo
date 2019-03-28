@@ -164,8 +164,10 @@ public class PinturilloProfileFrame extends JFrame {
 	}
 	
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
-		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);
-		
+		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);	
+	}
+	public void updateLobbyTime(int seconds) {
+		publicLobby.updateTime(seconds);
 	}
 	
 	public void generateScoreTable(LinkedList<String> nickNames, LinkedList<Integer> scores) {
@@ -209,6 +211,7 @@ public class PinturilloProfileFrame extends JFrame {
 				}
 			}
 		}
+		modInfoDialog.dispose();
 		return data;
 	}
 	
