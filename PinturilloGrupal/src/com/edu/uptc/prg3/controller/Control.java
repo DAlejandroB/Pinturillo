@@ -67,7 +67,6 @@ public class Control implements ActionListener {
 //			comm.sendLoginInfo(frame.getTxtNickName(), frame.getTxtPassword()); descomentarear
 			this.logFrame.dispose();
 		}else if(e.getActionCommand().equals("ver_amigos")) {
-			System.out.println("hola");
 			this.profileFrame.createUserFriendsFrame(this, "nickName", new LinkedList<String>());
 		}else if(e.getActionCommand().equals("amigo_seleccionado")) {
 			String selectedFriend = this.profileFrame.getSelectedFriend();
@@ -87,6 +86,7 @@ public class Control implements ActionListener {
 		}else if(e.getActionCommand().equals("entrar_sala_publica")) {
 			this.profileFrame.createPublicLobbyFrame(this, 60, new LinkedList<String>());
 			this.profileFrame.createGameFrame(this, true);
+			this.profileFrame.selectAWord("word1", "word2", "word3");
 		}else if(e.getActionCommand().equals("entrar_sala_privada")) {
 			long idRoom = this.profileFrame.enterToPrivateRoom();
 			if(idRoom!=-1) {

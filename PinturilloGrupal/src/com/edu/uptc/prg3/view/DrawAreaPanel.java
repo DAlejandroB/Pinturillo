@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class DrawAreaPanel extends JPanel implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DrawPanel drawPanel;
 	private JPanel colorsPanel;
 	private JButton btnRed, btnPurple, btnBlue, btnGreen, btnYellow, 
