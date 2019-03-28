@@ -11,7 +11,8 @@ import com.edu.uptc.structure.LinkedList;
 
 public class Comunicator {
 	private static final int PORT = 10345;
-	private static final String SERVER_IP = "192.168.0.7";
+//	private static final String SERVER_IP = "192.168.0.7"; diego
+	private static final String SERVER_IP = "192.168.0.41";
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	private Socket socket;

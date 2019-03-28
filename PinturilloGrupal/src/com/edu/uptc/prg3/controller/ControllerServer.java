@@ -79,10 +79,9 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "amigo_seleccionado":
 			String selectedFriend = ppFrame.getSelectedFriend();
-			if(selectedFriend!=""){}
+			if(selectedFriend!=" "){}
 			else {
-			ppFrame.setFriendInfo(selectedFriend, 0, "online"); //en 0 el puntaje y en "online" el status
-			
+				ppFrame.setFriendInfo(selectedFriend, 0, "online"); //en 0 el puntaje y en "online" el status
 			}break;
 		case "modificar_info":
 			break;

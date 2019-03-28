@@ -50,6 +50,7 @@ public class UserFriendsFrame extends JFrame{
 		friendsUserList.addActionListener(actionListener);
 		friendsUserList.setActionCommand("amigo_seleccionado");
 		this.fillFriendsLists(friendsName);
+		friendsUserList.setSelectedIndex(0);
 		friendsPanel.add(friendsUserList);
 		gbcFrame.gridx=0;
 		gbcFrame.gridy=0;
@@ -100,7 +101,7 @@ public class UserFriendsFrame extends JFrame{
 	 * @return A string with a nickName
 	 */
 	public String getSelectedFriend() {
-		return this.friendsUserList.getSelectedItem()!=null?this.friendsUserList.getSelectedItem().toString():" ";
+		return this.friendsUserList.getSelectedItem().toString();
 	}
 	
 	/**

@@ -11,6 +11,10 @@ import com.edu.uptc.prg3.view.ScoresTablePanel;
 import com.edu.uptc.structure.LinkedList;
 
 public class ScoresTableDialog extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ScoresTablePanel tablePanel;
 	
 	public ScoresTableDialog(GameFrame principal, LinkedList<String> nickNames, LinkedList<Integer> scores) {

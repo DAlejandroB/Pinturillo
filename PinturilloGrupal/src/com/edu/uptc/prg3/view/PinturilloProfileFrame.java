@@ -129,7 +129,8 @@ public class PinturilloProfileFrame extends JFrame {
 	}
 	
 	public void setFriendInfo(String nickName, long globalScore, String status) {
-		this.userFriendsFrame.setFriendInfo(nickName, globalScore, status);
+		if(userFriendsFrame!=null)
+			this.userFriendsFrame.setFriendInfo(nickName, globalScore, status);
 	}
 	
 	/**
@@ -176,6 +177,9 @@ public class PinturilloProfileFrame extends JFrame {
 	}
 	
 	public String getSelectedFriend() {
+		if(userFriendsFrame==null) {
+			return " ";
+		}
 		return this.userFriendsFrame.getSelectedFriend();
 	}
 	
