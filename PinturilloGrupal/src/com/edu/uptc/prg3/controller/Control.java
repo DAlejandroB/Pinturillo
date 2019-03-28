@@ -8,117 +8,208 @@ import com.edu.uptc.prg3.view.LoginFrame;
 import com.edu.uptc.prg3.view.PinturilloProfileFrame;
 import com.edu.uptc.structure.LinkedList;
 
-public class Control implements ActionListener {
-	private LoginFrame logFrame;
-	private PinturilloProfileFrame profileFrame;
+public class Control implements ActionListener{
+	private LoginFrame loginFrame;
 	private Comunicator comm;
-	/**
-	 * Este es solo un objeto de prueba. 
-	 */
-	public Control() {
-		logFrame = new LoginFrame(this);
+	private PinturilloProfileFrame ppFrame;
+	private String nickName;
+	public Control(){
+		init();
+		comm = new Comunicator();
 	}
-
-	/**
-	 * Comandos de la vista
-	 * mostrar_puntuaciones
-	 * mensaje_enviado
-	 * reportar					
-	 * crear_nueva_cuenta		listo
-	 * iniciar_sesion			listo
-	 * crear_cuenta				listo
-	 * entrar_sala_publica		listo
-	 * entrar_sala_privada		listo
-	 * crear_sala_privada		listo
-	 * ver_amigos				listo
-	 * modificar_info			listo
-	 * eliminar_cuenta			
-	 * cerrar_sesion			listo
-	 * abandonar_sala_publica
-	 * amigo_seleccionado //muestra info del amigo seleccionado
-	 * borrar_amigo				listo
-	 * añadir_amigo				listo
-	 * 
-	 */
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("crear_cuenta")) {
-			logFrame.createAccountDialog(this);
-		}else if(e.getActionCommand().equals("crear_nueva_cuenta")) {
-			String []info = logFrame.getNewAccountData();
-			if(info!=null) {
-				comm.sendRegisterInfo(info[0], info[1], null);
-				String operationStatus = comm.recieveMessage();
-				if(operationStatus.substring(0, 3) == "/scc") {
-					//TODO comunicar la creacion del usuario al cliente
-				}else if(operationStatus.substring(0, 3) == "/wrn") {
-					logFrame.printErrorMessagge("El nombre de usuario ya se encuentra en uso.");
-					//TODO comunicar que el nombre de usuario ya está ocupado
-				}else logFrame.closeCreateAccountDialog();
-			}
-			//llamar a este metodo frame.getNewAccountData(); verificar si es nulo, no hacer nada
-		}else if(e.getActionCommand().equals("iniciar_sesion")) {
-			//encontrar usuario usando frame.getTxtNickName(), y comparar la contraseña registrada con la 
-			//ingresada en frame.getTxtPassword(), extraer la puntuación actual del usuario encontrado
-			//si el usuario no es encontrado imprimir un mensaje con frame.printMessagge("No se ha encontrado al usuario");
-			this.profileFrame = new PinturilloProfileFrame(this, logFrame.getTxtNickName(), 50, "./data/icons/default_profile_icon.png");
-//			comm.sendLoginInfo(frame.getTxtNickName(), frame.getTxtPassword()); descomentarear
-			this.logFrame.dispose();
-		}else if(e.getActionCommand().equals("ver_amigos")) {
-			this.profileFrame.createUserFriendsFrame(this, "nickName", new LinkedList<String>());
-		}else if(e.getActionCommand().equals("amigo_seleccionado")) {
-			String selectedFriend = this.profileFrame.getSelectedFriend();
-			//encuentra al usuario seleccionado, y extrae su información, para plasmarla en un textPane
-			this.profileFrame.setFriendInfo(selectedFriend, 50, "Online");
-		}else if(e.getActionCommand().equals("modificar_info")) {
-			this.profileFrame.createModInfoDialog(this, "user", "ruta_imagen");
-			
-		}else if(e.getActionCommand().equals("eliminar_cuenta")) {
-			if(this.profileFrame.generateDeleteAccountDialog()==1) {
-				//metodo de eliminar cuenta
-			}
-		}else if(e.getActionCommand().equals("cerrar_sesion")) {
-			if(this.profileFrame.generateCloseSesionDialog()==1){
-				//metodo para cerrar sesion
-			}
-		}else if(e.getActionCommand().equals("entrar_sala_publica")) {
-			this.profileFrame.createPublicLobbyFrame(this, 60, new LinkedList<String>());
-			this.profileFrame.createGameFrame(this, true);
-			this.profileFrame.selectAWord("word1", "word2", "word3");
-		}else if(e.getActionCommand().equals("entrar_sala_privada")) {
-			long idRoom = this.profileFrame.enterToPrivateRoom();
-			if(idRoom!=-1) {
-				//si no se encuentra la sala..
-				this.profileFrame.roomNotFoundDialog();
-			}
-		}else if(e.getActionCommand().equals("crear_sala_privada")) {
-			long idRoom = this.profileFrame.createPrivateRoom();
-			if(idRoom!=-1) {
-				//metodo de crear sala privada
-			}
-		}else if(e.getActionCommand().equals("mostrar_puntuaciones")) {
-			this.profileFrame.generateScoreTable(new LinkedList<String> (), new LinkedList<Integer>());
-		}else if(e.getActionCommand().equals("borrar_amigo")) {
-			String nickNameFriend = profileFrame.getSelectedFriend();
-			if(nickNameFriend!=""&&this.profileFrame.deleteFriendResponse()==1) {
-				//metodo para eliminar un amigo por su nickName
-			}	
-		}else if(e.getActionCommand().equals("añadir_amigo")) {
-			String friend = this.profileFrame.addNewFriend();
-			//metodo que busca y añade al amigo a la lista del usuario local
-			//si no lo encuentra
-			this.profileFrame.generateFriendNotFoundMessage();
-		}else if(e.getActionCommand().equals("modificar_cuenta")) {
-			String info[] = this.profileFrame.getModAccountData();
-			if(info!=null) {
-				this.profileFrame.closeModDialog();
+	private void init() {
+		loginFrame = new LoginFrame(this);
+	}
+	
+	private void sendNewAccountInfo(String[] accountInfo) {
+		if(accountInfo != null) {
+			comm.sendRegisterInfo(accountInfo[0], accountInfo[1], null);
+			String recieved = comm.recieveMessage();
+			System.out.println(recieved);
+			switch(recieved) {
+			case "scc":
+				loginFrame.closeCreateAccountDialog();
+				loginFrame.printInfoMessage("Cuenta registrada exitosamente");
+				break;
+			case "wrn":
+				loginFrame.printErrorMessagge("El nombre de usuario ya ha sido seleccionado, por favor ingrese otro");
+				break;
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		Control control = new Control();
+	private LinkedList<String> friendList(){
+		String[] list = comm.requestFriendsList(this.nickName).split(",");
+		LinkedList<String> r = new LinkedList<>();
+		for (String string : list) {
+			r.add(string);
+		}
+		return r;
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand();
+		System.out.println(command);
+		switch(command) {
+		case "crear_cuenta"://listo
+			loginFrame.createAccountDialog(this);
+			break;
+		case "crear_nueva_cuenta"://listo
+				this.register();
+			break;
+		case "iniciar_sesion":
+			this.nickName = loginFrame.getTxtNickName();
+			if(login()) {
+				ppFrame = new PinturilloProfileFrame(this, nickName, 0, "");
+				loginFrame.dispose();
+			}
+			else 
+				loginFrame.printErrorMessagge("Cuenta no registrada o contraseña incorrecta");
+			break;
+		case "ver_amigos":
+			ppFrame.createUserFriendsFrame(this, nickName, friendList());
+			break;
+		case "borrar_amigo":
+			String nickNameFriend = ppFrame.getSelectedFriend();
+			if(this.ppFrame.deleteFriendResponse()==1) {
+				if(deleteFriend(nickNameFriend)) {
+					ppFrame.printInfoMessage("Amigo eliminado de su lista de amigos");
+				}else
+					ppFrame.printErrorMessagge("No se encuentra un usuario con ese nickname");
+			}
+			break;
+		case "amigo_seleccionado":
+			String selectedFriend = ppFrame.getSelectedFriend();
+			if(selectedFriend!=" "){}
+			else {
+				ppFrame.setFriendInfo(selectedFriend, 0, "online"); //en 0 el puntaje y en "online" el status
+			}break;
+		case "modificar_info":
+			ppFrame.createModInfoDialog(this, nickName, "");
+			break;
+		case "modificar_cuenta":
+			this.modifyInfo(ppFrame.getModAccountData());
+			break;
+		case "eliminar_cuenta":
+			break;
+		case "crear_sala_privada":
+			if(createPrivateRoom()) {
+				//TODO
+			}else {
+				ppFrame.printErrorMessagge("La id ya está siendo utilizada, ingrese otra porfavor");
+			}
+			break;
+		case "cerrar_sesion":
+			comm.sendMessage("/lgo" + nickName);
+			this.ppFrame.dispose();
+			this.loginFrame = new LoginFrame(this);
+			break;
+		case "entrar_sala_privada":
+			if(joinPrivateRoom()){
+				//TODO
+			}else {
+				ppFrame.printErrorMessagge("No existe una sala con ese ID, ingrese un id existente");
+			}
+			break;
+		case "entrar_sala_publica":
+			if(joinPublicRoom()) {
+				int s = readSeconds();
+				LinkedList<String> playerList = fillPlayers();
+				ppFrame.createPublicLobbyFrame(this, s, playerList);
+				Thread counter = new Thread(new Runnable() {
+					int i = s;
+					@Override
+					public void run() {
+						while(i > 0) {
+							i = comm.recieveNumber();
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {}
+							ppFrame.updateLobbyTime(i);
+						}
+						initGame();
+					}
+				});
+				counter.start();
+			}else {
+				ppFrame.printErrorMessagge("Ha ocurrido un error, por favor intentelo de nuevo");
+			}
+			break;
+		case "añadir_amigo":
+			if(addNewFriend(ppFrame.addNewFriend())) {
+				ppFrame.printInfoMessage("El usuario se ha agregado a la lista de amigos");
+			}
+		}
+	}
+	private void initGame() {
+		ppFrame.createGameFrame(this, true);
+	}
+	private void modifyInfo(String[] newFields) {
+		String fields = nickName + newFields[0] + ","+ newFields[1]  + ","+ newFields[2];
+		comm.sendMessage("/mod" + fields);
+	}
+	private boolean addNewFriend(String nickName) {
+		comm.sendMessage("/add" +this.nickName+ ","+ nickName);
+		String recieved = comm.recieveMessage();
+		return recieved.equals("scc");
+	}
+	private boolean deleteFriend(String friendNickname) {
+		comm.sendMessage("/dlt" +this.nickName+","+friendNickname);
+		String recieved = comm.recieveMessage();
+		return recieved.equals("scc");
+	}
+	private LinkedList<String> fillPlayers() {
+		String[] players = comm.recieveMessage().split(",");
+		LinkedList<String> playerList = new LinkedList<>();
+		for (String nickname : players) {
+			playerList.add(nickname);
+		}
+		return playerList;
+	}
+	private int readSeconds() {
+		int r = -1;
+		try {
+			r = comm.recieveNumber();
+		}catch(NumberFormatException e) {}
+		
+		return r;
+	}
+	private boolean joinPublicRoom() {
+		comm.sendMessage("/jpu" + nickName);
+		String recieved = comm.recieveMessage();
+		System.out.println("Conectado a sala");
+		return (recieved.equals("scc"));
+	}
+	private boolean joinPrivateRoom() {
+		comm.sendMessage("/jpr" + nickName+"," +  Long.toString(ppFrame.enterToPrivateRoom()));
+		String recieved = comm.recieveMessage();
+		System.out.println(recieved);
+		return(recieved.equals("scc"));
+	}
+	private boolean createPrivateRoom() {
+		comm.sendMessage("/crt" + nickName + "," + Long.toString(ppFrame.createPrivateRoom()));
+		String recieved = comm.recieveMessage();
+		return (recieved.equals("scc"));
+	}
+	private boolean login() {
+		comm.sendLoginInfo(loginFrame.getTxtNickName(), loginFrame.getTxtPassword());
+		String recieved = comm.recieveMessage();
+		return (recieved.equals("scc"));
+	}
+	private void register() {
+		String[] info = loginFrame.getNewAccountData();
+		if(info!=null) sendNewAccountInfo(info);		
+	}
+	
+	/**
+	 * Ejecutable temporal... pasar a paquete runner
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Control controller = new Control();
+	}
+	public void updateLobbyTime(int parseInt) {
+		ppFrame.updateLobbyTime(parseInt);
+	}
 }

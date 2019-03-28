@@ -1,9 +1,9 @@
 package test;
 
-import com.edu.uptc.prg3.controller.ControllerServer;
+import com.edu.uptc.prg3.controller.Control;
 
 public class LoginTest {
 	public static void main(String[] args) {
-		ControllerServer controller = new ControllerServer();
+		Control controller = new Control();
 	}
 }
