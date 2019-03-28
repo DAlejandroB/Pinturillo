@@ -11,9 +11,7 @@ import com.edu.uptc.prg3.view.dialogs.ScoresTableDialog;
 import com.edu.uptc.structure.LinkedList;
 
 public class GameFrame extends JFrame{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private DrawAreaPanel drawAreaPanel;
 	private ChatPanel chatPanel;
@@ -33,10 +31,22 @@ public class GameFrame extends JFrame{
 		this.setResizable(false);	
 	}
 	
+	/**
+	 * Generates a scores table of all the scores of the players in the room
+	 * @param nickNames all the nickNames of the players in the room
+	 * @param scores all the scores of the players in the room
+	 */
 	public void generateScoreTable(LinkedList<String> nickNames, LinkedList<Integer> scores) {
 		new ScoresTableDialog(this, nickNames, scores);
 	}
 	
+	/**
+	 * Puts three words in a dialog, and lets choose one of them to the drawer
+	 * @param word1 first word to choose
+	 * @param word2 second word to choose
+	 * @param word3 third word to choose
+	 * @return the selected word
+	 */
 	public String selectAWord(String word1, String word2, String word3) {
 		String selectedWord = "";
 		String[] options = {word1, word2, word3};
@@ -49,6 +59,10 @@ public class GameFrame extends JFrame{
 		return selectedWord;
 	}
 	
+	/**
+	 * Calls the flipDrawer method of the drawAreaPanel, and flips the status of the local player
+	 * @param isDrawer indicates if the local player is the drawer
+	 */
 	public void flipDrawer(boolean isDrawer) {
 		this.drawAreaPanel.flipDrawer(isDrawer);
 	}

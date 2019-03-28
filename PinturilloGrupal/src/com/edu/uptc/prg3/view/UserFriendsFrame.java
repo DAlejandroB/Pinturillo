@@ -23,9 +23,7 @@ import com.edu.uptc.structure.LinkedList;
 import com.edu.uptc.structure.Node;
 
 public class UserFriendsFrame extends JFrame{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel friendsPanel, friendSettingsPanel, friendInfoPanel, buttonsPanel;
 	private JComboBox<String> friendsUserList;
@@ -115,6 +113,12 @@ public class UserFriendsFrame extends JFrame{
 		return JOptionPane.showConfirmDialog(this, message)==JOptionPane.OK_OPTION?1:2;
 	}
 	
+	/**
+	 * Puts the info of a friend in the txt friend info of the frame
+	 * @param nickName the nickName of the friend
+	 * @param globalScore the globalScore of the friend
+	 * @param status the status of the friend
+	 */
 	public void setFriendInfo(String nickName, long globalScore, String status) {
 		String info = "NickName: "+nickName+"\n";
 			    info+="GlobalScore: "+globalScore+"\n";
@@ -122,15 +126,26 @@ public class UserFriendsFrame extends JFrame{
 		this.txtFriendInfo.setText(info);
 	}
 	
+	/**
+	 * Gets the nickName of an user to be added to the local player friends list
+	 * @return a string with a nickName
+	 */
 	public String addNewFriend() {
 		return JOptionPane.showInputDialog("Ingrese el nick name del usuario: ");	
 	}
 	
+	/**
+	 * Generates an error message when an user isn´t found
+	 */
 	public void generateFriendNotFoundMessage() {
 		JOptionPane.showMessageDialog(this, "Error 404. Usuario no encontrado", "Error",
 												JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Fills the combobox with the nickNames of the local player
+	 * @param friendsName a linkedlist with all the nicknames of the local player
+	 */
 	public void fillFriendsLists(LinkedList<String> friendsName) {
 		if(!friendsName.isEmpty()) {
 			Node<String> aux = friendsName.getHead();
@@ -142,7 +157,7 @@ public class UserFriendsFrame extends JFrame{
 	}
 	
 	/**
-	 * Método que centra el frame 
+	 * Centers the frame
 	 */
 	private void center() {
         Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );

@@ -28,6 +28,9 @@ public class ScoresTableDialog extends JDialog{
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Centers the frame
+	 */
 	private void center() {
         Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );
         int xEdge = ( screen.width - getWidth( ) ) / 2;

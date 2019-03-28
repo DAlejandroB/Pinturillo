@@ -2,33 +2,26 @@ package com.edu.uptc.prg3.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
-
 import com.edu.uptc.structure.LinkedList;
 import com.edu.uptc.structure.Node;
 
-public class PublicLobbyFrame extends JFrame{
-	/**
-	 * 
-	 */
+public class PrivateLobbyFrame extends JFrame{
+
 	private static final long serialVersionUID = 1L;
 	private JLabel lblPlayers;
 	private JTextPane txtNickPlayers;
-	private JLabel lblInfoCounter;
-	private JButton btnLeftRoom;
+	private JButton btnLeftRoom, btnInvite;
 	
-	public PublicLobbyFrame(ActionListener actionListener, int timeSeconds, LinkedList<String> roomPlayers) {
-		super("Sala de espera (pública)");
+	public PrivateLobbyFrame(ActionListener actionListener, LinkedList<String> roomPlayers, boolean isTheLeader) {
+		super("Sala de espera (privada)");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(500,300);
 		this.setLayout(new GridBagLayout());
@@ -46,19 +39,12 @@ public class PublicLobbyFrame extends JFrame{
 		this.fillTextPane(roomPlayers);
 		gbc.gridy=1;
 		this.add(txtNickPlayers, gbc);
-						
-		lblInfoCounter = new JLabel("<html>La partida se iniciará en: "+timeSeconds
-				+" segundos,<br> o cuando se complete el cupo máximo<html>");
-		lblInfoCounter.setBackground(Color.CYAN);
-		lblInfoCounter.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK),
-				"Segundos para iniciar la partida", 
-				0, 1, new Font("Italic", 2, 15), Color.BLACK));
-		gbc.gridy=2;
-		this.add(lblInfoCounter, gbc);
+		
+		this.generateInviteButton(isTheLeader, gbc, actionListener);
 		
 		this.btnLeftRoom = new JButton("Abandonar Sala");
 		btnLeftRoom.addActionListener(actionListener);
-		btnLeftRoom.setActionCommand("abandonar_sala_publica");
+		btnLeftRoom.setActionCommand("abandonar_sala_privada");
 		btnLeftRoom.setBackground(new Color(255, 111, 111));
 		gbc.gridx=1;
 		gbc.gridy=3;
@@ -68,6 +54,22 @@ public class PublicLobbyFrame extends JFrame{
 		this.center();
 		this.setResizable(false);
 		this.setVisible(true);
+	}
+	
+	/**
+	 * Generates the invite button only if the player is the room leader
+	 * @param isTheLeader indicates if the player is the leader
+	 * @param gbc a GridBagConstraints object
+	 * @param actionListener an ActionListener object
+	 */
+	private void generateInviteButton(boolean isTheLeader, GridBagConstraints gbc, ActionListener actionListener) {
+		if(isTheLeader) {
+			gbc.gridy=2;
+			this.btnInvite = new JButton("Invitar amigos");
+			btnInvite.addActionListener(actionListener);
+			btnInvite.setActionCommand("invitar_amigos");
+			this.add(btnInvite, gbc);
+		}
 	}
 	
 	/**
@@ -89,15 +91,6 @@ public class PublicLobbyFrame extends JFrame{
 	}
 	
 	/**
-	 * Update the remaining time that is showed in the lobby frame
-	 * @param currentTime the current seconds of the public room
-	 */
-	public void updateTime(int currentTime) {
-		lblInfoCounter.setText(/*"La partida se iniciará en: "*/""+currentTime
-			/*	+" segundos, o cuando se complete el cupo máximo"*/);
-	}
-	
-	/**
 	 * Centers the frame
 	 */
 	private void center() {
@@ -106,5 +99,4 @@ public class PublicLobbyFrame extends JFrame{
         int yEdge = ( screen.height - getHeight( ) ) / 2;
         setLocation( xEdge, yEdge );
     }
-	
 }

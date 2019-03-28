@@ -116,25 +116,45 @@ public class PinturilloProfileFrame extends JFrame {
 		this.setVisible(true);
 	}
 		
+	/**
+	 * Creates an user friends frame 
+	 * @param actionListener an actionListener object
+	 * @param userNick a string with the nickName of the local player
+	 * @param friendsName a linked list with all the nickNames of the local player
+	 */
 	public void createUserFriendsFrame(ActionListener actionListener, String userNick, LinkedList<String> friendsName) {
 		this.userFriendsFrame = new UserFriendsFrame(actionListener, userNick, friendsName);
 	}
 	
+	/**
+	 * Shows an error dialog with a personalized message
+	 * @param message the message to be showed
+	 */
 	public void printErrorMessagge(String message) {
 		JOptionPane.showMessageDialog( this, message, "error", JOptionPane.ERROR_MESSAGE );
 	}
 	
+	/**
+	 * Shows an information dialog with a personalized message
+	 * @param message the message to be showed
+	 */
 	public void printInfoMessage(String message) {
 		JOptionPane.showMessageDialog( this, message, "info", JOptionPane.INFORMATION_MESSAGE );
 	}
 	
+	/**
+	 * Sets the info of the selected friend in the list
+	 * @param nickName the nickName of the selected friend
+	 * @param globalScore the globalScore of the selected friend
+	 * @param status the current status of the selected friend
+	 */
 	public void setFriendInfo(String nickName, long globalScore, String status) {
 		if(userFriendsFrame!=null)
 			this.userFriendsFrame.setFriendInfo(nickName, globalScore, status);
 	}
 	
 	/**
-	 * Creates a confirmDialog with a message
+	 * Creates a question Dialog with a message
 	 * @param message the message to ask in the dialog
 	 * @return 1 if the answer is 'OK', 2 in another case
 	 */
@@ -142,59 +162,102 @@ public class PinturilloProfileFrame extends JFrame {
 		return JOptionPane.showConfirmDialog(this, message)==JOptionPane.OK_OPTION?1:2;
 	}
 	
+	/**
+	 * Calls the generateQuestionDialog of this class, and lets confirm the delete account option
+	 * @return 1 = OK, 2 = NO
+	 */
 	public int generateDeleteAccountDialog() {
 		return this.generateQuestionDialog("Esta seguro que desea eliminar esta cuenta?"
 				+ "\nLos cambios no podrán ser revertidos");
 	}
 	
+	/**
+	 * Shows a question dialog for the close sesion option
+	 * @return 1 = OK, 2 = NO
+	 */
 	public int generateCloseSesionDialog() {
 		return this.generateQuestionDialog("Esta seguro que desea cerrar la sesión actual?");
 	}
 	
+	/**
+	 * Calls the delete friend response method of the user friends frame
+	 * @return 1 = delete friend / 2 = don´t delete it
+	 */
 	public int deleteFriendResponse() {
 		return this.userFriendsFrame.deleteFriendResponse();
 	}
 	
+	/**
+	 * Calls the addNewFriend method of the user friends frame
+	 * @return the nickName of the friend to be added
+	 */
 	public String addNewFriend() {
 		return this.userFriendsFrame.addNewFriend();
 	}
 	
+	/**
+	 * Calls the generateFriendNotFoundMessage to the userFriendsFrame class
+	 */
 	public void generateFriendNotFoundMessage() {
 		this.userFriendsFrame.generateFriendNotFoundMessage();
 	}
 	
+	/**
+	 * Creates a public lobby frame 
+	 * @param actionListener an actionListener object
+	 * @param currentSeconds the current wait seconds of the lobby
+	 * @param roomPlayers The players that log in the lobby
+	 */
 	public void createPublicLobbyFrame(ActionListener actionListener, int currentSeconds, LinkedList<String> roomPlayers) {
 		this.publicLobby = new PublicLobbyFrame(actionListener, currentSeconds, roomPlayers);	
 	}
 	public void updateLobbyTime(int seconds) {
 		publicLobby.updateTime(seconds);
 	}
-	
+	/**
+	 * Calls the generateScoreTable method of the gameFrame
+	 * @param nickNames a linkedlist of the nickNames of the round players
+	 * @param scores a linkedlist of the scores of the round players
+	 */
 	public void generateScoreTable(LinkedList<String> nickNames, LinkedList<Integer> scores) {
 		this.gameFrame.generateScoreTable(nickNames, scores);
 	}
 	
+	/**
+	 * Creates a frame for the pinturillo game
+	 * @param actionListener an actionListener object
+	 * @param isDrawer indicates if the player is the drawer
+	 */
 	public void createGameFrame(ActionListener actionListener, boolean isDrawer) {
 		this.gameFrame = new GameFrame(actionListener, isDrawer);
 	}
 	
+	/**
+	 * Calls the getSelectedFriend method of the userFriendsFrame
+	 * @return a string with the selected friend nickName / or " " if isn´t selected
+	 */
 	public String getSelectedFriend() {
-		if(userFriendsFrame==null) {
+		if(userFriendsFrame==null) 
 			return " ";
-		}
 		return this.userFriendsFrame.getSelectedFriend();
 	}
 	
+	/**
+	 * Creates a dialog that lets modify the player information
+	 * @param actionListener an actionListener object
+	 * @param nickName the nickName of the local player
+	 * @param iconPath the icon path of the local player
+	 */
 	public void createModInfoDialog(ActionListener actionListener, String nickName, String iconPath) {
 		this.modInfoDialog = new ModifyInfoDialog(this, actionListener, nickName, iconPath);
 		this.modInfoDialog.setVisible(true);
 	}
 	
 	/**
-	 * Método que obtiene los datos ingresados en el dialogo de nueva cuenta.
-	 * Almacena los datos en un arreglo de strings con el siguiente orden: 
-	 * 1. NickName 2. Password 3. Ruta del icono
-	 * @return un arreglo de strings con la informacion del nuevo usuario.
+	 * Gets the entered data in the new account dialog. Then, saves the data in a string array 
+	 * with the next order:
+	 * 1. NickName 2. Password 3. Icon path
+	 * @return a string array with the new user information
 	 */
 	public String[] getModAccountData() {
 		String data[] = null;
@@ -215,6 +278,13 @@ public class PinturilloProfileFrame extends JFrame {
 		return data;
 	}
 	
+	/**
+	 * Calls the selectAWord method of the gameFrame
+	 * @param word1 the first word
+	 * @param word2 the second word
+	 * @param word3 the third word
+	 * @return the selected word
+	 */
 	public String selectAWord(String word1, String word2, String word3) {
 		return this.gameFrame.selectAWord(word1, word2, word3);
 	}
@@ -229,7 +299,7 @@ public class PinturilloProfileFrame extends JFrame {
 	
 	/**
 	 * Creates a dialog, for number input for a new private room id
-	 * @return
+	 * @return the id of the created private room
 	 */
 	public long createPrivateRoom() {
 		long idPrivateRoom = -1;
@@ -244,10 +314,17 @@ public class PinturilloProfileFrame extends JFrame {
 		return idPrivateRoom;
 	}
 	
+	/**
+	 * Show a dialog with a room not found message
+	 */
 	public void roomNotFoundDialog() {
 		JOptionPane.showMessageDialog(this, "Error 404: Sala no encontrada");
 	}
 	
+	/**
+	 * Shows a dialog to enter the id of a private room, for join into
+	 * @return the private room id
+	 */
 	public long enterToPrivateRoom() {
 		long idPrivateRoom = -1;
 		String answer = JOptionPane.showInputDialog("Ingrese el id de la sala privada: ");
@@ -261,12 +338,15 @@ public class PinturilloProfileFrame extends JFrame {
 		return idPrivateRoom;
 	}
 	
+	/**
+	 * Closes the modify information dialog
+	 */
 	public void closeModDialog() {
 		this.modInfoDialog.dispose();
 	}
 	
 	/**
-	 * Método que centra el frame 
+	 * Centers the frame 
 	 */
 	private void center() {
         Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );

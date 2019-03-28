@@ -26,6 +26,9 @@ public class CreateAccountDialog extends JDialog {
 		this.pack();
 	}
 	
+	/**
+	 * Centers the frame
+	 */
 	private void center() {
         Dimension screen = Toolkit.getDefaultToolkit( ).getScreenSize( );
         int xEdge = ( screen.width - getWidth( ) ) / 2;
@@ -33,6 +36,10 @@ public class CreateAccountDialog extends JDialog {
         setLocation( xEdge, yEdge );
     }
 	
+	/**
+	 * Gets the nickName of the textField
+	 * @return the entered nickName
+	 */
 	public String getNickName() {
 		String nickName = panel.getTxtNick();
 		if(nickName.equals("")) {
@@ -47,10 +54,9 @@ public class CreateAccountDialog extends JDialog {
 	}
 	
 	/**
-	 * Verifica si la contraseña ingresada en los campos "Contraseña" y "Repetir contraseña"
-	 * son iguales, y retorna un string con el valor ingresado
-	 * @return la contraseña, si son iguales. En caso contrario retorna la constante String 
-	 * definida en esta clase dialogo
+	 * Verify if the entered passwords in the "Contraseña" and "Repetir contraseña" are equals, 
+	 * and returns a string with the entered data 
+	 * @return the password, if are equals. In another case, returns the string constant definied in this class
 	 */
 	public String getPassword() {
 		String password = "";
@@ -68,7 +74,4 @@ public class CreateAccountDialog extends JDialog {
 		}
 		return password;
 	}
-	
-	
-	
 }
