@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import com.edu.uptc.prg3.controller.Control;
+import com.edu.uptc.prg3.controller.ControlCliente;
 import com.edu.uptc.structure.LinkedList;
 
 

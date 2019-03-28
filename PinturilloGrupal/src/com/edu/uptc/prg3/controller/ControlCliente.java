@@ -8,12 +8,12 @@ import com.edu.uptc.prg3.view.LoginFrame;
 import com.edu.uptc.prg3.view.PinturilloProfileFrame;
 import com.edu.uptc.structure.LinkedList;
 
-public class Control implements ActionListener{
+public class ControlCliente implements ActionListener{
 	private LoginFrame loginFrame;
 	private Comunicator comm;
 	private PinturilloProfileFrame ppFrame;
 	private String nickName;
-	public Control(){
+	public ControlCliente(){
 		init();
 		comm = new Comunicator();
 	}
@@ -207,7 +207,7 @@ public class Control implements ActionListener{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Control controller = new Control();
+		ControlCliente controller = new ControlCliente();
 	}
 	public void updateLobbyTime(int parseInt) {
 		ppFrame.updateLobbyTime(parseInt);
