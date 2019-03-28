@@ -96,7 +96,7 @@ public class UserFriendsFrame extends JFrame{
 	 * @return A string with a nickName
 	 */
 	public String getSelectedFriend() {
-		return this.friendsUserList.getSelectedItem()!=null?this.friendsUserList.getSelectedItem().toString():"";
+		return this.friendsUserList.getSelectedItem()!=null?this.friendsUserList.getSelectedItem().toString():" ";
 	}
 	
 	/**

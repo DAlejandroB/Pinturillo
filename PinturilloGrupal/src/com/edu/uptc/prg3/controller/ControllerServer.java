@@ -40,8 +40,12 @@ public class ControllerServer implements ActionListener{
 		}
 	}
 	private LinkedList<String> friendList(){
-		String list = comm.requestFriendsList(this.nickName);
-		return gsonParser.fromJson(list, LinkedList.class);
+		String[] list = comm.requestFriendsList(this.nickName).split(",");
+		LinkedList<String> r = new LinkedList<>();
+		for (String string : list) {
+			r.add(string);
+		}
+		return r;
 	}
 	
 	@Override
@@ -75,9 +79,11 @@ public class ControllerServer implements ActionListener{
 			break;
 		case "amigo_seleccionado":
 			String selectedFriend = ppFrame.getSelectedFriend();
-			//metodo que busca un usuario por su nickName, y retorna su nickName, puntaje global y status
+			if(selectedFriend!=""){}
+			else {
 			ppFrame.setFriendInfo(selectedFriend, 0, "online"); //en 0 el puntaje y en "online" el status
-			break;
+			
+			}break;
 		case "modificar_info":
 			break;
 		case "eliminar_cuenta":

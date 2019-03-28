@@ -27,12 +27,9 @@ public class Comunicator {
 	}
 	
 	public String requestFriendsList(String nickname){
-		sendMessage("/rql");
+		sendMessage("/rql" + nickname);
 		String message = this.recieveMessage();
-		if(message.substring(0, 3).equals("/jsl")) {
-			return message.substring(4);
-		}
-		return null;
+		return message;
 	}
 	
 	public void sendMessage(String message) {

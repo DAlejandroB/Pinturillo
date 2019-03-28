@@ -25,12 +25,12 @@ public class Control implements ActionListener {
 	 * mostrar_puntuaciones
 	 * mensaje_enviado
 	 * reportar
-	 * crear_nueva_cuenta
-	 * iniciar_sesion
-	 * crear_cuenta
-	 * entrar_sala_publica
-	 * entrar_sala_privada
-	 * crear_sala_privada
+	 * crear_nueva_cuenta		listo
+	 * iniciar_sesion			listo
+	 * crear_cuenta				listo
+	 * entrar_sala_publica		listo
+	 * entrar_sala_privada		listo
+	 * crear_sala_privada		listo
 	 * ver_amigos
 	 * modificar_info
 	 * eliminar_cuenta
